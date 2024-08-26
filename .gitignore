@@ -35,5 +35,6 @@
 build
 out
 
-# IDE files
+# IDE files and directories
 CMakeSettings.json
+/.vscode/
