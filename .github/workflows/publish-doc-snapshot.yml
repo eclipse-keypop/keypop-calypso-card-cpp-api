@@ -8,6 +8,8 @@ on:
 
 jobs:
   publish-doc-snapshot:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code from ${{ github.repository }}/${{ github.ref }}
