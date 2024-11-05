@@ -1,0 +1,4 @@
+theme: jekyll-theme-minimal
+title: Keypop Calypso Card C++ API
+include:
+  - "_*.html"
