@@ -13,9 +13,23 @@ permissions:
   checks: write
 
 jobs:
-  notify-doc-site:
+  check-secret:
     runs-on: ubuntu-latest
-    if: "${{ env.PAT_TOKEN != '' }}"
+    outputs:
+      has-token: ${{ steps.check.outputs.has-token }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ secrets.PAT_TOKEN }}" != "" ]; then
+            echo "has-token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has-token=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  notify-doc-site:
+    needs: check-secret
+    if: needs.check-secret.outputs.has-token == 'true'
+    runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch Event
         uses: peter-evans/repository-dispatch@v3
