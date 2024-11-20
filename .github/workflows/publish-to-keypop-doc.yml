@@ -1,0 +1,24 @@
+name: Trigger Centralized Documentation Update
+
+on:
+  workflow_run:
+    workflows:
+      - "Publish API documentation (snapshot)"
+      - "Publish API documentation (release)"
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  checks: write
+
+jobs:
+  notify-doc-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch Event
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository: eclipse-keypop/keypop-api-docs
+          event-type: update-submodules

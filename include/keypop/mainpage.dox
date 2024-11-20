@@ -1,0 +1,79 @@
+/**
+* @mainpage Keypop Calypso Card C++ API Documentation
+*
+* @section overview Overview
+*
+* The Keypop Calypso Card C++ API defines interfaces for managing Calypso card transactions, both in
+* free mode and secure mode using either symmetric or asymmetric cryptography.
+*
+* @section architecture Architecture & Components
+*
+* @subsection card_management Card Management
+*
+* - keypop::calypso::card::card::CalypsoCard
+*   Core card interface with card identification and content access
+*
+* - keypop::calypso::card::card::CalypsoCardSelectionExtension
+*   Selection process and initialization commands preparation
+*
+* @subsection files File System Management
+*
+* - keypop::calypso::card::card::DirectoryHeader
+*   Calypso DF metadata management
+*
+* - keypop::calypso::card::card::ElementaryFile
+*   Calypso EF management for records, counters, binary files
+*
+* - keypop::calypso::card::card::FileHeader
+*   EF metadata management
+*
+* - keypop::calypso::card::card::FileData
+*   EF content access
+*
+* @subsection transaction Transaction Management
+*
+* - keypop::calypso::card::transaction::FreeTransactionManager
+*   Non-secure mode transaction management
+*
+* - keypop::calypso::card::transaction::SecureRegularModeTransactionManager
+*   Regular secure mode compatible with all products
+*
+* - keypop::calypso::card::transaction::SecureExtendedModeTransactionManager
+*   Extended secure mode for Calypso Prime Extended products
+*
+* @subsection security Security Settings
+*
+* - keypop::calypso::card::transaction::SymmetricCryptoSecuritySetting
+*   Security settings for symmetric cryptography
+*
+* - keypop::calypso::card::transaction::spi::SymmetricCryptoCardTransactionManagerFactory
+*   Factory for symmetric crypto managers
+*
+* - keypop::calypso::card::transaction::spi::AsymmetricCryptoCardTransactionManagerFactory
+*   Factory for asymmetric crypto managers
+*
+* @subsection stored_value Stored Value
+*
+* - keypop::calypso::card::card::SvLoadLogRecord
+*   SV load operation log management
+*
+* - keypop::calypso::card::card::SvDebitLogRecord
+*   SV debit operation log management
+*
+* @section exceptions Exception Handling
+*
+* - keypop::calypso::card::transaction::CardIOException
+*   Card communication error handling
+*
+* - keypop::calypso::card::transaction::ReaderIOException
+*   Reader communication error handling
+*
+* - keypop::calypso::card::transaction::CryptoException
+*   Cryptographic operation error handling
+*
+* - keypop::calypso::card::transaction::InvalidCardSignatureException
+*   Invalid card signature error handling
+*
+* - keypop::calypso::card::transaction::UnexpectedCommandStatusException
+*   Unexpected card command response handling
+*/

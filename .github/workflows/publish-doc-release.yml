@@ -1,8 +1,12 @@
 name: Publish API documentation (release)
-
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (ex: 1.0.0)'
+        required: true
 
 jobs:
   publish-doc-release:
@@ -10,29 +14,23 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code from ${{ github.repository }}/${{ github.ref }}
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Make scripts executable
-        run: chmod +x ./.github/scripts/*.sh
-      - name: Check version
-        working-directory: .
-        run: ./.github/scripts/check_version.sh $(echo "${{ github.ref }}" | sed -e "s,^refs/tags/,,")
-      - name: Patch Doxyfile
-        working-directory: .
-        run: ./.github/scripts/patch_doxyfile.sh $(echo "${{ github.ref }}" | sed -e "s,^refs/tags/,,")
-      - name: Generate project documentation with Doxygen
-        uses: mattnotmitt/doxygen-action@v1.9.2
+
+      - name: Generate and prepare documentation
+        uses: eclipse-keypop/keypop-actions/doxygen@v1
         with:
-          working-directory: .github/doxygen/
-          doxyfile-path: ./Doxyfile
-      - name: Prepare Doxygen doc page locally
-        working-directory: .
-        run: ./.github/scripts/prepare_doxygen.sh $(echo "${{ github.ref }}" | sed -e "s,^refs/tags/,,")
-      - name: Deploy Doxygen documentation to gh-pages
+          repo-name: ${{ github.event.repository.name }}
+          version: ${{ github.event.inputs.version || github.ref_name }}
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./${{ github.event.repository.name }}
           enable_jekyll: true
+          user_name: "Eclipse Keypop Bot"
+          user_email: "${{ github.repository }}-bot@eclipse.org"
+          commit_message: 'docs: update ${{ github.event.inputs.version || github.ref_name }} documentation'
