@@ -9,18 +9,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 
-# Uncomment and modify when preparing a release candidate
-SET(RC_VERSION "1")
-
 PROJECT(KeypopCalypsoCardCppApi
         VERSION 2.0.0
         C CXX)
-
-if(DEFINED RC_VERSION)
-    SET(PACKAGE_VERSION "${PROJECT_VERSION}-rc${RC_VERSION}")
-else()
-    SET(PACKAGE_VERSION "${PROJECT_VERSION}")
-endif()
 
 SET(PACKAGE_NAME "keypop-calypso-card-cpp-api")
 SET(PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
