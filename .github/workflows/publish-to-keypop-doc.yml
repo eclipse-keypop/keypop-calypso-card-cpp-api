@@ -20,7 +20,7 @@ jobs:
     steps:
       - id: check
         run: |
-          if [ "${{ secrets.PAT_TOKEN }}" != "" ]; then
+          if [ "${{ secrets.ORG_GITHUB_BOT_TOKEN }}" != "" ]; then
             echo "has-token=true" >> "$GITHUB_OUTPUT"
           else
             echo "has-token=false" >> "$GITHUB_OUTPUT"
@@ -34,6 +34,6 @@ jobs:
       - name: Repository Dispatch Event
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.ORG_GITHUB_BOT_TOKEN }}
           repository: eclipse-keypop/keypop-api-docs
           event-type: update-submodules
