@@ -1,9 +1,10 @@
 name: Trigger Centralized Documentation Update
 
 on:
-  push:
-    branches:
-      - doc
+  workflow_run:
+    workflows: ['Publish API documentation (snapshot)', 'Publish API documentation (release)']
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
