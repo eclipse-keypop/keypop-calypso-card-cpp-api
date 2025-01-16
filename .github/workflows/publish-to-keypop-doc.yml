@@ -13,6 +13,7 @@ permissions:
 jobs:
   check-secret:
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     outputs:
       has-token: ${{ steps.check.outputs.has-token }}
     steps:
