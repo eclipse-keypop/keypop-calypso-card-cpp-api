@@ -25,7 +25,7 @@ jobs:
         run: |
           git config --global user.name 'Eclipse Keypop Bot'
           git config --global user.email '${{ github.repository }}-bot@eclipse.org'
-          cd ${{ steps.repo-info.outputs.repo_name }}
+          cd ${{ github.event.repository.name }}
           git add .
           git commit -m "docs: update snapshot documentation"
           git push origin doc --force
