@@ -26,6 +26,9 @@ jobs:
           git config --global user.name "Eclipse Keypop Bot"
           git config --global user.email "${{ github.repository }}-bot@eclipse.org"
           cd ${{ github.event.repository.name }}
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add .
           git commit -m "docs: update snapshot documentation"
           git push origin doc --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
