@@ -32,7 +32,11 @@ jobs:
           cd ${{ github.event.repository.name }}
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add .
-          git commit -m "docs: update ${{ github.event.inputs.version || github.ref_name }} documentation"
-          git push origin doc --force
+          if ! git diff --quiet --staged; then
+            git commit -m "docs: update ${{ github.event.inputs.version || github.ref_name }} documentation"
+            git push origin doc --force
+          else
+            echo "No changes to commit"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
