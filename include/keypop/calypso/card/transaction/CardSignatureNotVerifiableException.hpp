@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -19,9 +20,9 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates that the card has correctly closed the secure session, but that it is impossible to
- * check the authenticity of the card session because the cryptographic module is no more available
- * (timeout, network problem, etc.).
+ * Indicates that the card has correctly closed the secure session, but that it
+ * is impossible to check the authenticity of the card session because the
+ * cryptographic module is no more available (timeout, network problem, etc.).
  *
  * @since 1.2.0
  */

@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -19,8 +20,9 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates that the secure session cannot be performed atomically because the session buffer
- * capacity is not sufficient to handle all the prepared write commands.
+ * Indicates that the secure session cannot be performed atomically because the
+ * session buffer capacity is not sufficient to handle all the prepared write
+ * commands.
  *
  * @since 1.2.0
  */

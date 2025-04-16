@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -19,8 +20,8 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates that the file selection failed because it was not found. This can happen in the
- * following cases:
+ * Indicates that the file selection failed because it was not found. This can
+ * happen in the following cases:
  *
  * <ul>
  *   <li>The "Select File" card command status is 6A82h;
@@ -37,7 +38,8 @@ public:
      * @param cause The cause.
      * @since 1.4.0
      */
-    SelectFileException(const std::string& message, const std::shared_ptr<std::exception> cause)
+    SelectFileException(
+        const std::string& message, const std::shared_ptr<std::exception> cause)
     : std::runtime_error(message) {
         (void)cause;
     }
