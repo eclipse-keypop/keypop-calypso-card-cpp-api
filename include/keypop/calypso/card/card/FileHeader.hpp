@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -38,8 +39,9 @@ public:
     /**
      * Gets the DF status.
      *
-     * @return Null if the status is not available (e.g. when the {@code FileHeader} is created
-     *         following the response to a "Get Data" command with the GetDataTag::EF_LIST tag).
+     * @return Null if the status is not available (e.g. when the {@code
+     * FileHeader} is created following the response to a "Get Data" command
+     * with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
     virtual const std::shared_ptr<uint8_t> getDfStatus() const = 0;
@@ -57,8 +59,8 @@ public:
      *
      * <ul>
      *   <li>For a Counter file, the number of records is always 1.<br>
-     *       Extra bytes (rest of the division of the file size by 3) aren't accessible.
-     *   <li>For a Binary file, the number of records is always 1.
+     *       Extra bytes (rest of the division of the file size by 3) aren't
+     * accessible. <li>For a Binary file, the number of records is always 1.
      * </ul>
      *
      * @return The number of records.
@@ -70,9 +72,10 @@ public:
      * Gets the size of a record :
      *
      * <ul>
-     *   <li>For a Counter file, the record size is the original size of the record #1.<br>
-     *       Extra bytes (rest of the division of the file size by 3) aren't accessible.
-     *   <li>For a Binary file, the size of the record is corresponding to the file size.
+     *   <li>For a Counter file, the record size is the original size of the
+     * record #1.<br> Extra bytes (rest of the division of the file size by 3)
+     * aren't accessible. <li>For a Binary file, the size of the record is
+     * corresponding to the file size.
      * </ul>
      *
      * @return The size of a record.
@@ -83,9 +86,9 @@ public:
     /**
      * Gets a reference to the access conditions.
      *
-     * @return An empty array if the access conditions are not available (e.g. when the {@code
-     *         FileHeader} is created following the response to a "Get Data" command with the
-     *         GetDataTag::EF_LIST tag).
+     * @return An empty array if the access conditions are not available (e.g.
+     * when the {@code FileHeader} is created following the response to a "Get
+     * Data" command with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
     virtual const std::vector<uint8_t>& getAccessConditions() const = 0;
@@ -93,19 +96,20 @@ public:
     /**
      * Gets a reference to the keys indexes.
      *
-     * @return An empty array if the key indexes are not available (e.g. when the {@code FileHeader}
-     *         is created following the response to a "Get Data" command with the
-     *         GetDataTag::EF_LIST tag).
+     * @return An empty array if the key indexes are not available (e.g. when
+     * the {@code FileHeader} is created following the response to a "Get Data"
+     * command with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
     virtual const std::vector<uint8_t>& getKeyIndexes() const = 0;
 
     /**
-     * Gets the non-zero unique identifier of the shared data when the file data is shared.
+     * Gets the non-zero unique identifier of the shared data when the file data
+     * is shared.
      *
-     * @return Zero if the file data is not shared or null if the information is not available (e.g.
-     *         when the {@code FileHeader} is created following the response to a "Get Data" command
-     *         with the GetDataTag::EF_LIST tag).
+     * @return Zero if the file data is not shared or null if the information is
+     * not available (e.g. when the {@code FileHeader} is created following the
+     * response to a "Get Data" command with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
     virtual const std::shared_ptr<uint16_t> getSharedReference() const = 0;

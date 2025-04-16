@@ -9,7 +9,7 @@
 
 IF(NOT EXISTS "${CMAKE_BINARY_DIR}/_deps/googletest-build")
 
-    MESSAGE("fetching GTest from keypop calypso card")
+    MESSAGE("-- > Fetching GTest from keypop calypso card")
 
     # FetchContent added in CMake 3.11, downloads during the configure step
     # FetchContent_MakeAvailable was added in CMake 3.14; simpler usage
