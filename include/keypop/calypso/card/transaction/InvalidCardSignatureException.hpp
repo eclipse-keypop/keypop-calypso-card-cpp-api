@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -21,17 +22,18 @@ namespace transaction {
 /**
  * Indicates that the card signature is incorrect.
  *
- * <p>In the case of a card transaction secured by "symmetrical" cryptography (e.g. SAM), this
- * indicates that the card has correctly closed the secure session, but the card session is not
- * authentic because the MAC of the card is incorrect. This can happen in the following cases:
+ * <p>In the case of a card transaction secured by "symmetrical" cryptography
+ * (e.g. SAM), this indicates that the card has correctly closed the secure
+ * session, but the card session is not authentic because the MAC of the card is
+ * incorrect. This can happen in the following cases:
  *
  * <ul>
  *   <li>The "Digest Authenticate" command status is 6988h;
  *   <li>The "SV Check" command status is 6988h;
  * </ul>
  *
- * In the case of a card transaction secured by "asymmetrical" cryptography (e.g. PKI), this
- * indicates only that the card signature is incorrect.
+ * In the case of a card transaction secured by "asymmetrical" cryptography
+ * (e.g. PKI), this indicates only that the card signature is incorrect.
  *
  * @since 1.2.0
  */

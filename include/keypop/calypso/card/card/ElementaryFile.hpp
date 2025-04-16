@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -44,25 +45,26 @@ public:
         LINEAR,
 
         /**
-         * A Binary EF contains a single continuous sequence of data bytes from byte #0 (first byte)
-         * to byte #N−1 (last byte, for a binary file of N bytes).
+         * A Binary EF contains a single continuous sequence of data bytes from
+         * byte #0 (first byte) to byte #N−1 (last byte, for a binary file of N
+         * bytes).
          *
          * @since 1.0.0
          */
         BINARY,
 
         /**
-         * A Cyclic EF is made of 1 to several records organized in a cycle, from the most recent
-         * (record #1) to the oldest.
+         * A Cyclic EF is made of 1 to several records organized in a cycle,
+         * from the most recent (record #1) to the oldest.
          *
          * @since 1.0.0
          */
         CYCLIC,
 
         /**
-         * A Counters EF is made of a single record containing an ordered sequence of K counters of
-         * three bytes each, from counter #1 (bytes at offsets 0, 1 and 2 of the record) to counter
-         * #K.
+         * A Counters EF is made of a single record containing an ordered
+         * sequence of K counters of three bytes each, from counter #1 (bytes at
+         * offsets 0, 1 and 2 of the record) to counter #K.
          *
          * @since 1.0.0
          */
@@ -70,8 +72,8 @@ public:
 
         /**
          * A Simulated Counter EF is a linear file with a single record.<br>
-         * Simulated Counter EFs are present for compatibility with the Calypso Revision 2 access to
-         * simulated individual counters.
+         * Simulated Counter EFs are present for compatibility with the Calypso
+         * Revision 2 access to simulated individual counters.
          *
          * @since 1.0.0
          */
@@ -107,8 +109,10 @@ public:
      */
     friend std::ostream&
     operator<<(std::ostream& os, const ElementaryFile& ef) {
-        os << "ELEMENTARY_FILE: {" << "SFI: " << ef.getSfi() << ", " << "HEADER: " << ef.getHeader()
-           << ", " << "DATA: " << ef.getData() << "}";
+        os << "ELEMENTARY_FILE: {"
+           << "SFI: " << ef.getSfi() << ", "
+           << "HEADER: " << ef.getHeader() << ", "
+           << "DATA: " << ef.getData() << "}";
 
         return os;
     }
@@ -131,7 +135,9 @@ public:
      *
      */
     friend std::ostream&
-    operator<<(std::ostream& os, const std::vector<std::shared_ptr<ElementaryFile>>& ef) {
+    operator<<(
+        std::ostream& os,
+        const std::vector<std::shared_ptr<ElementaryFile>>& ef) {
         os << "ELEMENTARY_FILES: {";
 
         for (auto it = ef.begin(); it != ef.end(); it++) {
