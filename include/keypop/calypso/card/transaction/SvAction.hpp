@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -21,16 +22,17 @@ namespace transaction {
  */
 enum class SvAction {
     /**
-     * In the case of a {@link SvOperation#RELOAD}, loads a positive amount; in the case of a {@link
-     * SvOperation#DEBIT}, debits a positive amount
+     * In the case of a {@link SvOperation#RELOAD}, loads a positive amount; in
+     * the case of a {@link SvOperation#DEBIT}, debits a positive amount
      *
      * @since 1.0.0
      */
     DO,
 
     /**
-     * In the case of a {@link SvOperation#RELOAD}, loads a negative amount; in the case of a {@link
-     * SvOperation#DEBIT}, cancels, totally or partially, a previous debit.
+     * In the case of a {@link SvOperation#RELOAD}, loads a negative amount; in
+     * the case of a {@link SvOperation#DEBIT}, cancels, totally or partially, a
+     * previous debit.
      *
      * @since 1.0.0
      */
