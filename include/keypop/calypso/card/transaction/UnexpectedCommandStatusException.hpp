@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -19,17 +20,18 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates that an unexpected command status was returned by the card or the cryptographic module.
+ * Indicates that an unexpected command status was returned by the card or the
+ * cryptographic module.
  *
- * <p>This can occur if the card or the cryptographic module is not Calypso compliant or if the card
- * has refused the secure session closing.
+ * <p>This can occur if the card or the cryptographic module is not Calypso
+ * compliant or if the card has refused the secure session closing.
  *
- * <p>For this last case, this is usually due to an incorrect cryptographic module signature, or
- * that the secure session has been altered by other APDU commands that would have interfered with
- * it.
+ * <p>For this last case, this is usually due to an incorrect cryptographic
+ * module signature, or that the secure session has been altered by other APDU
+ * commands that would have interfered with it.
  *
- * <p>If a secure session was open, the card discarded all data by cancelling all updates except for
- * PIN verification attempts.
+ * <p>If a secure session was open, the card discarded all data by cancelling
+ * all updates except for PIN verification attempts.
  *
  * @since 1.2.0
  */

@@ -1,28 +1,41 @@
-# *************************************************************************************************
-# Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                         *
-#                                                                                                 *
-# This program and the accompanying materials are made available under the                        *
-# terms of the MIT License which is available at https://opensource.org/licenses/MIT.             *
-#                                                                                                 *
-# SPDX-License-Identifier: MIT                                                                    *
-# *************************************************************************************************/
+# *****************************************************************************
+# Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/     *
+#                                                                             *
+# This program and the accompanying materials are made available under the    *
+# terms of the MIT License which is available at                              *
+# https://opensource.org/licenses/MIT.                                        *
+#                                                                             *
+# SPDX-License-Identifier: MIT                                                *
+# *****************************************************************************/
 
-IF(NOT EXISTS "${CMAKE_BINARY_DIR}/_deps/googletest-build")
+# FetchContent added in CMake 3.11, downloads during the configure step
+# FetchContent_MakeAvailable was added in CMake 3.14; simpler usage
+INCLUDE(FetchContent)
 
-    MESSAGE("fetching GTest from keypop calypso card")
+IF(NOT EXISTS "${CMAKE_BINARY_DIR}/_deps/googletest-src")
 
-    # FetchContent added in CMake 3.11, downloads during the configure step
-    # FetchContent_MakeAvailable was added in CMake 3.14; simpler usage
-    INCLUDE(FetchContent)
+    MESSAGE("-- > Fetching GTest from keypop calypso card")
 
     FetchContent_Declare(
+
         googletest
+
         GIT_REPOSITORY    https://github.com/google/googletest.git
         GIT_TAG           v1.14.0
     )
 
-    # For Windows: Prevent overriding the parent project's compiler/linker settings
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(googletest)
+ELSE()
+
+    FetchContent_Declare(
+
+        googletest
+
+        SOURCE_DIR ${CMAKE_BINARY_DIR}/_deps/googletest-src
+    )
 
 ENDIF()
+
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(googletest)

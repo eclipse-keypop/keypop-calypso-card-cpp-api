@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -18,13 +19,14 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates the detection of inconsistent data related to one of the following cases:
+ * Indicates the detection of inconsistent data related to one of the following
+ * cases:
  *
  * <ul>
- *   <li>A de-synchronization of the APDU exchanges. This means that the number of APDU responses is
- *       different from the number of APDU requests.
- *   <li>An inconsistency in the card data. This can happen, for example, if the data read in
- *       session is different from the data read outside the session.
+ *   <li>A de-synchronization of the APDU exchanges. This means that the number
+ * of APDU responses is different from the number of APDU requests. <li>An
+ * inconsistency in the card data. This can happen, for example, if the data
+ * read in session is different from the data read outside the session.
  * </ul>
  *
  * @since 1.2.0

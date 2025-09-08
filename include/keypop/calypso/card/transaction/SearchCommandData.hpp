@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -39,17 +40,19 @@ public:
      *
      * <p>By default, the search will begin from the first record.
      *
-     * @param recordNumber The number of the record where the search should begin.
+     * @param recordNumber The number of the record where the search should
+     * begin.
      * @return The current instance.
      * @since 1.1.0
      */
     virtual SearchCommandData& startAtRecord(const uint8_t recordNumber) = 0;
 
     /**
-     * Sets the offset in number of bytes from which the analysis should be performed within a
-     * record.
+     * Sets the offset in number of bytes from which the analysis should be
+     * performed within a record.
      *
-     * <p>By default, the analysis will start at the beginning of the record (offset 0).
+     * <p>By default, the analysis will start at the beginning of the record
+     * (offset 0).
      *
      * @param offset The offset.
      * @return The current instance.
@@ -58,9 +61,10 @@ public:
     virtual SearchCommandData& setOffset(const int offset) = 0;
 
     /**
-     * Allows the command to analyze the data present at the given offset, and repeatedly at each
-     * following offset, until the end of the record is reached. The last offset is less or equal
-     * than ((record size) − (length of the search data)).
+     * Allows the command to analyze the data present at the given offset, and
+     * repeatedly at each following offset, until the end of the record is
+     * reached. The last offset is less or equal than ((record size) − (length
+     * of the search data)).
      *
      * @return The current instance.
      * @since 1.1.0
@@ -74,11 +78,12 @@ public:
      * @return The current instance.
      * @since 1.1.0
      */
-    virtual SearchCommandData& setSearchData(const std::vector<uint8_t>& data) = 0;
+    virtual SearchCommandData& setSearchData(const std::vector<uint8_t>& data)
+        = 0;
 
     /**
-     * Sets the mask of bits to take into account during the comparison (padded right with FFh if
-     * absent or incomplete).
+     * Sets the mask of bits to take into account during the comparison (padded
+     * right with FFh if absent or incomplete).
      *
      * <p>Requirement: The length of the mask must be <b>less or equal</b> than the length of the
      * data to search.
@@ -90,8 +95,8 @@ public:
     virtual SearchCommandData& setMask(const std::vector<uint8_t>& mask) = 0;
 
     /**
-     * Requests to fetch the content of the first matching record into the {@link
-     * org.calypsonet.terminal.calypso.card.CalypsoCard}.
+     * Requests to fetch the content of the first matching record into the
+     * {@link org.calypsonet.terminal.calypso.card.CalypsoCard}.
      *
      * @return The current instance.
      * @since 1.1.0
@@ -101,7 +106,8 @@ public:
     /**
      * Returns a list containing the numbers of the records who has matched.
      *
-     * @return An empty list if no record has matched or if the command has not yet been processed.
+     * @return An empty list if no record has matched or if the command has not
+     * yet been processed.
      * @since 1.1.0
      */
     virtual std::vector<uint8_t>& getMatchingRecordNumbers() = 0;

@@ -1,11 +1,12 @@
-/**************************************************************************************************
- * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *
- *                                                                                                *
- * This program and the accompanying materials are made available under the                       *
- * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *
- *                                                                                                *
- * SPDX-License-Identifier: MIT                                                                   *
- **************************************************************************************************/
+/******************************************************************************
+ * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *
+ *                                                                            *
+ * This program and the accompanying materials are made available under the   *
+ * terms of the MIT License which is available at                             *
+ * https://opensource.org/licenses/MIT.                                       *
+ *                                                                            *
+ * SPDX-License-Identifier: MIT                                               *
+ ******************************************************************************/
 
 #pragma once
 
@@ -36,19 +37,20 @@ public:
      * @return A new instance of CalypsoCardSelectionExtension.
      * @since 2.0.0
      */
-    virtual std::shared_ptr<CalypsoCardSelectionExtension> createCalypsoCardSelectionExtension()
-        = 0;
+    virtual std::shared_ptr<CalypsoCardSelectionExtension>
+    createCalypsoCardSelectionExtension() = 0;
 
     /**
      * Returns a new instance of SymmetricCryptoSecuritySetting.
      *
-     * @param cryptoCardTransactionManagerFactory The factory of the crypto card transaction manager
-     *        to be used.
+     * @param cryptoCardTransactionManagerFactory The factory of the crypto card
+     * transaction manager to be used.
      * @return A new instance of SymmetricCryptoSecuritySetting.
      * @throw IllegalArgumentException If the factory is null or invalid.
      * @since 2.0.0
      */
-    virtual std::shared_ptr<SymmetricCryptoSecuritySetting> createSymmetricCryptoSecuritySetting(
+    virtual std::shared_ptr<SymmetricCryptoSecuritySetting>
+    createSymmetricCryptoSecuritySetting(
         const std::shared_ptr<SymmetricCryptoCardTransactionManagerFactory>
             cryptoCardTransactionManagerFactory)
         = 0
@@ -62,8 +64,10 @@ public:
          * @throw  IllegalArgumentException If one of the parameters is null.
          * @since 2.0.0
          */
-        virtual std::shared_ptr<FreeTransactionManager> createFreeTransactionManager(
-            const std::shared_ptr<CardReader> cardReader, const std::shared_ptr<CalypsoCard> card)
+        virtual std::
+            shared_ptr<FreeTransactionManager> createFreeTransactionManager(
+                const std::shared_ptr<CardReader> cardReader,
+                const std::shared_ptr<CalypsoCard> card)
         = 0;
 
     /**
