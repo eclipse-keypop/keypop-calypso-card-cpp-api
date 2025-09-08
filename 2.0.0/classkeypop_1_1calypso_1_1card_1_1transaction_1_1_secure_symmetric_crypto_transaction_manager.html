@@ -136,7 +136,7 @@ class keypop::calypso::card::transaction::SecureSymmetricCryptoTransactionManage
 </dl>
 <dl class="section since"><dt>Since</dt><dd>2.0.0 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_secure_symmetric_crypto_transaction_manager_8hpp_source.html#l00034">34</a> of file <a class="el" href="_secure_symmetric_crypto_transaction_manager_8hpp_source.html">SecureSymmetricCryptoTransactionManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_secure_symmetric_crypto_transaction_manager_8hpp_source.html#l00035">35</a> of file <a class="el" href="_secure_symmetric_crypto_transaction_manager_8hpp_source.html">SecureSymmetricCryptoTransactionManager.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa1730437f986bbb834dd88cfca8f288a" name="aa1730437f986bbb834dd88cfca8f288a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1730437f986bbb834dd88cfca8f288a">&#9670;&nbsp;</a></span>prepareChangeKey()</h2>
@@ -283,8 +283,9 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <p >Schedules the execution of an "Open Secure Session" command.</p>
 <p >The secure session will be opened with the provided <a class="el" href="namespacekeypop_1_1calypso_1_1card.html#a52de754ec51aaf462a338a496e206692">WriteAccessLevel</a> depending on whether it is a personalization, reload or debit transaction profile.</p>
-<p >Note that if the next prepared command is a "Read One Record" or "Read One Or More
-Counters", then it will by default be merged with the "Open Secure Session" command for optimization purposes except if the "pre-open" mode is active.</p>
+<p >Note that if the next prepared command is a "Read One Record" or "Read
+One Or More Counters", then it will by default be merged with the "Open
+Secure Session" command for optimization purposes except if the "pre-open" mode is active.</p>
 <p >This mechanism may in some cases be incompatible with the security constraints and can be disabled via the <a class="el" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_symmetric_crypto_security_setting.html#a67e8e9e569846a11a1cf85056af2fb24">SymmetricCryptoSecuritySetting#disableReadOnSessionOpening()</a> method.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

@@ -115,7 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5a7850719249ed6aaaeb663d11f32d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Extends the <a class="el" href="">CardSelectionExtension</a> interface of the "Keypop Reader API" to provide means to define optional commands to be executed during the selection phase.</p>
+<div class="textblock"><p >Extends the <a class="el" href="">CardSelectionExtension</a> interface of the "Keypop Reader
+API" to provide means to define optional commands to be executed during the selection phase.</p>
 <p >An instance of this interface can be obtained via the method <a class="el" href="classkeypop_1_1calypso_1_1card_1_1_calypso_card_api_factory.html#aa7406569afd87bfa7c9ae49561be28d6">CalypsoCardApiFactory#createCalypsoCardSelectionExtension()</a>.</p>
 <p >Note 1: by default, the selection process ignores PRIME revision 3 cards that have been invalidated. The <a class="el" href="classkeypop_1_1calypso_1_1card_1_1card_1_1_calypso_card_selection_extension.html#a59ccbf2908c342d926d9392d8c7d4729">CalypsoCardSelectionExtension#acceptInvalidatedCard()</a> method must be called to stop ignoring them.<br  />
  This feature does not apply to earlier revisions for which it is necessary to run a Select File (DF) command to determine the invalidation status. In this case, the rejection or acceptance of invalidated cards will have to be handled by the application.</p>
@@ -137,7 +138,7 @@ Input data length: [1..250] or [1..32767] for binary files </li>
 </ul>
 <dl class="section since"><dt>Since</dt><dd>2.0.0 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_calypso_card_selection_extension_8hpp_source.html#l00056">56</a> of file <a class="el" href="_calypso_card_selection_extension_8hpp_source.html">CalypsoCardSelectionExtension.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_calypso_card_selection_extension_8hpp_source.html#l00059">59</a> of file <a class="el" href="_calypso_card_selection_extension_8hpp_source.html">CalypsoCardSelectionExtension.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a59ccbf2908c342d926d9392d8c7d4729" name="a59ccbf2908c342d926d9392d8c7d4729"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a59ccbf2908c342d926d9392d8c7d4729">&#9670;&nbsp;</a></span>acceptInvalidatedCard()</h2>
