@@ -14,9 +14,10 @@
 #include <vector>
 
 #include "keypop/calypso/card/GetDataTag.hpp"
-#include "keypop/calypso/card/SearchCommandData.hpp"
+#include "keypop/calypso/card/PutDataTag.hpp"
 #include "keypop/calypso/card/SelectFileControl.hpp"
 #include "keypop/calypso/card/transaction/ChannelControl.hpp"
+#include "keypop/calypso/card/transaction/SearchCommandData.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -28,7 +29,7 @@ namespace transaction {
  *
  * <p>To exchange data with the card, it is first necessary to prepare the
  * commands to be transmitted to the card and then to process the prepared
- * commands via the {@link #processCommands(ChannelControl)} method.
+ * commands via the processCommands(ChannelControl) method.
  *
  * <p>The card commands preparation step makes it possible to group commands
  * together in order to minimize network data exchanges (especially useful in a
@@ -59,9 +60,9 @@ public:
      * Schedules the execution of a "Select File" command to select an EF by its
      * LID in the current DF.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the {@link
-     * CalypsoCard#getFileBySfi(byte)}/{@link CalypsoCard#getFileByLid(short)} and {@link
-     * ElementaryFile#getHeader()} methods.
+     * <p>Data will be available in CalypsoCard using the
+     * CalypsoCard#getFileBySfi(byte)/CalypsoCard#getFileByLid(short) and
+     * ElementaryFile#getHeader() methods.
      *
      * <p>Caution: the command will fail if the selected file is not an EF.
      *
@@ -69,7 +70,7 @@ public:
      * @return The current instance.
      * @since 1.1.0
      */
-    virtual T& prepareSelectFile(const uint16_t lid) = 0;
+    virtual T& prepareSelectFile(std::uint16_t lid) = 0;
 
     /**
      * Schedules the execution of a "Select File" command using a navigation
@@ -83,67 +84,78 @@ public:
      * @throw IllegalArgumentException If selectFileControl is null.
      * @since 1.0.0
      */
-    virtual T& prepareSelectFile(const SelectFileControl selectFileControl) = 0;
+    virtual T& prepareSelectFile(SelectFileControl selectFileControl) = 0;
 
     /**
-     * Schedules the execution of a "Get Data" command to retrieve the data
-     * indicated by the provided tag.
+     * Schedules the execution of one or more "Get Data" command to retrieve the
+     * data indicated by the provided data type.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the {@link
-     * ElementaryFile#getHeader()} or {@link CalypsoCard#getDirectoryHeader()}
-     * methods, depending on the provided tag.
+     * <p>Data will be available in CalypsoCard using the
+     * ElementaryFile::getHeader() or CalypsoCard::getDirectoryHeader() methods,
+     * depending on the provided tag.
      *
-     * @param tag The tag to use.
+     * <p><b>SECURITY WARNING:</b>This method <b>cannot</b> be used within a
+     * secure session (both contact and contactless modes).
+     *
+     * @param tag The data type.
      * @return The current instance.
      * @throw UnsupportedOperationException If the Get Data command with the
      * provided tag is not supported.
      * @throw IllegalArgumentException If tag is null.
+     * @throw IllegalStateException If a secure session is open.
      * @since 1.0.0
      */
-    virtual T& prepareGetData(const GetDataTag tag) = 0;
+    virtual T& prepareGetData(GetDataTag tag) = 0;
+
+    /**
+     * Schedules the execution of one or more "Put Data" command to inject the
+     * provided data associated with the provided data type.
+     *
+     * <p>This command can be performed only out of a secure session.
+     *
+     * @param tag The data type.
+     * @param data The data to inject.
+     * @return The current instance.
+     * @throw UnsupportedOperationException If the Put Data command with the
+     * provided tag is not supported.
+     * @throw IllegalArgumentException If tag is null or data is empty.
+     * @throw IllegalStateException If a secure session is open.
+     * @since 2.1.0
+     */
+    virtual T&
+    preparePutData(PutDataTag tag, const std::vector<std::uint8_t>& data) = 0;
 
     /**
      * Schedules the execution of a "Read Records" command to read a single
      * record from the indicated EF.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
-     * <p>Depending on whether we are inside a secure session, there are two
-     * types of behavior following this command:
+     * <p>The following "process" command will not fail whatever the existence
+     * of the targeted file or record (the CalypsoCard object may not be
+     * filled).
      *
-     * <ul>
-     *   <li>Outside a secure session (best effort mode): the following
-     * "process" command will not fail whatever the existence of the targeted
-     * file or record (the {@link CalypsoCard} object may not be filled).
-     *   <li>Inside a secure session in contactless mode (strict mode): the
-     * following "process" command will fail if the targeted file or record does
-     * not exist (the CalypsoCard object is always filled or an exception is
-     * raised when the reading failed).
-     * </ul>
-     *
-     * <p><b>This method should not be used inside a secure session in contact mode</b> because
-     * additional exchanges with the card will be operated and will corrupt the
-     * security of the session. Instead, use the method {@link
-     * #prepareReadRecords(byte, int, int, int)} for this case and provide valid
-     * parameters.
+     * <p><b>SECURITY WARNING:</b>This method <b>cannot</b> be used within a
+     * secure session (both contact and contactless modes). Instead, use the
+     * method prepareReadRecords(byte, int, int, int) for this case and provide
+     * valid parameters.
      *
      * @param sfi The SFI of the EF to read.
      * @param recordNumber The record to read.
      * @return The current instance.
      * @throw IllegalArgumentException If one of the provided arguments is out
-     * of range.
-     * @throw IllegalStateException If this method is called inside a secure
-     * session in contact mode.
+     *        of range.
+     * @throw IllegalStateException If a secure session is open.
      * @since 1.1.0
      */
-    virtual T& prepareReadRecord(const uint8_t sfi, const int recordNumber) = 0;
+    virtual T& prepareReadRecord(std::uint8_t sfi, int recordNumber) = 0;
 
     /**
      * Schedules the execution of a "Read Records" command to read one or more
      * records from the indicated EF.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
+     * <p>Data will be available in CalypsoCard using the dedicated file
      * and data management methods.
      *
      * <p>Depending on whether we are inside a secure session, there are two
@@ -152,10 +164,10 @@ public:
      * <ul>
      *   <li>Outside a secure session (best effort mode): the following
      * "process" command will not fail whatever the existence of the targeted
-     * file or record (the {@link CalypsoCard} object may not be filled).
+     * file or record (the CalypsoCard object may not be filled).
      *   <li>Inside a secure session (strict mode): the following "process"
      * command will fail if the targeted file or record does not exist (the
-     * {@link CalypsoCard} object is always filled or an exception is raised
+     * CalypsoCard object is always filled or an exception is raised
      * when the reading failed).<br> Invalid parameters could lead to additional
      * exchanges with the card and thus corrupt the security of the session.
      * </ul>
@@ -170,34 +182,24 @@ public:
      * @since 1.1.0
      */
     virtual T& prepareReadRecords(
-        const uint8_t sfi,
-        const int fromRecordNumber,
-        const int toRecordNumber,
-        const int recordSize)
-        = 0;
+        std::uint8_t sfi,
+        int fromRecordNumber,
+        int toRecordNumber,
+        int recordSize) = 0;
 
     /**
      * Schedules the execution of one or multiple "Read Record Multiple"
      * commands to read all or parts of multiple records of the indicated EF.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
+     * <p>Data will be available in CalypsoCard using the dedicated file
      * and data management methods.
      *
-     * <p>Depending on whether we are inside a secure session, there are two
-     * types of behavior following this command:
+     * <p>The following "process" command will not fail whatever the existence
+     * of the targeted file or the validity of the offset and number of bytes to
+     * read (the CalypsoCard object may not be filled).
      *
-     * <ul>
-     *   <li>Outside a secure session (best effort mode): the following
-     * "process" command will not fail whatever the existence of the targeted
-     * file or the validity of the offset and number of bytes to read (the
-     * {@link CalypsoCard} object may not be filled). <li>Inside a secure
-     * session (strict mode): the following "process" command will fail if the
-     *       targeted file does not exist or if the offset and number of bytes
-     * to read are not valid (the {@link CalypsoCard} object is always filled or
-     * an exception is raised when the reading failed).<br> Invalid parameters
-     * could lead to additional exchanges with the card and thus corrupt the
-     * security of the session.
-     * </ul>
+     * <p><b>SECURITY WARNING:</b>This method <b>cannot</b> be used within a
+     * secure session (both contact and contactless modes).
      *
      * @param sfi The SFI of the EF.
      * @param fromRecordNumber The number of the first record to read.
@@ -210,21 +212,21 @@ public:
      * this card.
      * @throw IllegalArgumentException If one of the provided argument is out of
      * range.
+     * @throw IllegalStateException If a secure session is open.
      * @since 1.1.0
      */
     virtual T& prepareReadRecordsPartially(
-        const uint8_t sfi,
-        const int fromRecordNumber,
-        const int toRecordNumber,
-        const int offset,
-        const int nbBytesToRead)
-        = 0;
+        std::uint8_t sfi,
+        int fromRecordNumber,
+        int toRecordNumber,
+        int offset,
+        int nbBytesToRead) = 0;
 
     /**
      * Schedules the execution of one or multiple "Read Binary" commands to read
      * all or part of the indicated "binary" EF.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
+     * <p>Data will be available in CalypsoCard using the dedicated file
      * and data management methods.
      *
      * <p>Depending on whether we are inside a secure session, there are two
@@ -234,10 +236,10 @@ public:
      *   <li>Outside a secure session (best effort mode): the following
      * "process" command will not fail whatever the existence of the targeted
      * file or the validity of the offset and number of bytes to read (the
-     * {@link CalypsoCard} object may not be filled). <li>Inside a secure
+     * CalypsoCard object may not be filled). <li>Inside a secure
      * session (strict mode): the following "process" command will fail if the
      *       targeted file does not exist or if the offset and number of bytes
-     * to read are not valid (the {@link CalypsoCard} object is always filled or
+     * to read are not valid (the CalypsoCard object is always filled or
      * an exception is raised when the reading failed).<br> Invalid parameters
      * could lead to additional exchanges with the card and thus corrupt the
      * security of the session.
@@ -253,9 +255,8 @@ public:
      * range.
      * @since 1.1.0
      */
-    virtual T& prepareReadBinary(
-        const uint8_t sfi, const int offset, const int nbBytesToRead)
-        = 0;
+    virtual T&
+    prepareReadBinary(std::uint8_t sfi, int offset, int nbBytesToRead) = 0;
 
     /**
      * Schedules the execution of a "Read Records" command to reads a record of
@@ -264,7 +265,7 @@ public:
      * <p>The record will be read up to the counter location indicated in
      * parameter.<br> Thus, all previous counters will also be read.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
+     * <p>Data will be available in CalypsoCard using the dedicated file
      * and data management methods.
      *
      * <p>Depending on whether we are inside a secure session, there are two
@@ -273,10 +274,10 @@ public:
      * <ul>
      *   <li>Outside a secure session (best effort mode): the following
      * "process" command will not fail whatever the existence of the targeted
-     * file or counter (the {@link CalypsoCard} object may not be filled).
+     * file or counter (the CalypsoCard object may not be filled).
      *   <li>Inside a secure session (strict mode): the following "process"
      * command will fail if the targeted file or counter does not exist (the
-     * {@link CalypsoCard} object is always filled or an exception is raised
+     * CalypsoCard object is always filled or an exception is raised
      * when the reading failed).<br> Invalid parameters could lead to additional
      * exchanges with the card and thus corrupt the security of the session.
      * </ul>
@@ -288,8 +289,7 @@ public:
      * range.
      * @since 1.1.0
      */
-    virtual T& prepareReadCounter(const uint8_t sfi, const int nbCountersToRead)
-        = 0;
+    virtual T& prepareReadCounter(std::uint8_t sfi, int nbCountersToRead) = 0;
 
     /**
      * Schedules the execution of a "Search Record Multiple" command to search
@@ -304,45 +304,38 @@ public:
      * the file. During the search, an optional mask is applied. The mask allows
      * to specify precisely the bits to be taken into account in the comparison.
      *
-     * <p>See {@link SearchCommandData} class for a description of the
-     * parameters.
+     * <p>See SearchCommandData class for a description of the parameters.
      *
-     * <p>Once this command is processed, the result is available in the provided input/output
-     * SearchCommandData object, and the content of the first matching record in
-     * CalypsoCard if requested.
+     * <p>Once this command is processed, the result is available in the
+     * provided input/output SearchCommandData object, and the content of the
+     * first matching record in CalypsoCard if requested.
      *
-     * <p>Depending on whether we are inside a secure session, there are two
-     * types of behavior following this command:
+     * <p>The following "process" command will not fail whatever the existence
+     * of the targeted file or the validity of the record number and offset (the
+     * SearchCommandData and CalypsoCard} objects may not be updated).
      *
-     * <ul>
-     *   <li>Outside a secure session (best effort mode): the following
-     * "process" command will not fail whatever the existence of the targeted
-     * file or the validity of the record number and offset (the {@link
-     * SearchCommandData} and {@link CalypsoCard} objects may not be updated).
-     *   <li>Inside a secure session (strict mode): the following "process"
-     * command will fail if the targeted file does not exist or if the record
-     * number and the offset are not valid (the
-     *       {@link SearchCommandData} and {@link CalypsoCard} objects are
-     * always filled or an exception is raised when the reading failed).
-     * </ul>
+     * <p><b>SECURITY WARNING:</b>This method <b>cannot</b> be used within a
+     * secure session (both contact and contactless modes).
      *
      * @param data The input/output data containing the parameters of the command.
      * @return The current instance.
      * @throw UnsupportedOperationException If the "Search Record Multiple"
-     * command is not available for this card.
+     *        command is not available for this card.
      * @throw IllegalArgumentException If the input data is inconsistent.
+     * @throw IllegalStateException If a secure session is open.
      * @see SearchCommandData
      * @since 1.1.0
      */
-    virtual T& prepareSearchRecords(const SearchCommandData data) = 0;
+    virtual T& prepareSearchRecords(std::shared_ptr<SearchCommandData> data)
+        = 0;
 
     /**
      * Schedules the execution of a "Verify Pin" command without PIN
      * presentation in order to get the attempt counter.
      *
-     * <p>The PIN status will be available in {@link CalypsoCard} using the
-     * {@link CalypsoCard#getPinAttemptRemaining()} and {@link
-     * CalypsoCard#isPinBlocked()} methods.
+     * <p>The PIN status will be available in CalypsoCard using the
+     * CalypsoCard::getPinAttemptRemaining() and
+     * CalypsoCard::isPinBlocked() methods.
      *
      * @return The current instance.
      * @throws UnsupportedOperationException If the PIN feature is not available
@@ -370,8 +363,7 @@ public:
      * @since 1.0.0
      */
     virtual T& prepareAppendRecord(
-        const uint8_t sfi, const std::vector<uint8_t>& recordData)
-        = 0;
+        std::uint8_t sfi, const std::vector<std::uint8_t>& recordData) = 0;
 
     /**
      * Schedules the execution of an "Update Record" command to overwrites the
@@ -380,8 +372,8 @@ public:
      * <p>If the input data is shorter than the record size, only the first
      * bytes will be overwritten.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * @param sfi The sfi to select.
      * @param recordNumber The record to update.
@@ -395,10 +387,9 @@ public:
      * @since 1.0.0
      */
     virtual T& prepareUpdateRecord(
-        const uint8_t sfi,
-        const int recordNumber,
-        const std::vector<uint8_t>& recordData)
-        = 0;
+        std::uint8_t sfi,
+        int recordNumber,
+        const std::vector<std::uint8_t>& recordData) = 0;
 
     /**
      * Schedules the execution of a "Write Record" command to updates the target
@@ -423,10 +414,9 @@ public:
      * @since 1.0.0
      */
     virtual T& prepareWriteRecord(
-        const uint8_t sfi,
-        const int recordNumber,
-        const std::vector<uint8_t>& recordData)
-        = 0;
+        std::uint8_t sfi,
+        int recordNumber,
+        const std::vector<std::uint8_t>& recordData) = 0;
 
     /**
      * Schedules the execution of one or multiple "Update Binary" command to
@@ -436,8 +426,8 @@ public:
      * <p>The data of the file before the offset and after the data given are
      * left unchanged.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * @param sfi The SFI of the EF to select.
      * @param offset The offset (0 indicates the first byte).
@@ -452,7 +442,7 @@ public:
      * @since 1.1.0
      */
     virtual T& prepareUpdateBinary(
-        const uint8_t sfi, const int offset, const std::vector<uint8_t>& data)
+        std::uint8_t sfi, int offset, const std::vector<std::uint8_t>& data)
         = 0;
 
     /**
@@ -464,8 +454,8 @@ public:
      * <p>The data of the file before the offset and after the data given are
      * left unchanged.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * @param sfi The SFI of the EF to select.
      * @param offset The offset (0 indicates the first byte).
@@ -480,7 +470,7 @@ public:
      * @since 1.1.0
      */
     virtual T& prepareWriteBinary(
-        const uint8_t sfi, const int offset, const std::vector<uint8_t>& data)
+        std::uint8_t sfi, int offset, const std::vector<std::uint8_t>& data)
         = 0;
 
     /**
@@ -488,11 +478,11 @@ public:
      * counter.
      *
      * <p>If several counters of the same file have to be incremented at the
-     * same time of the transaction, it is recommended to use the method {@link
-     * #prepareIncreaseCounters(byte, Map)} for optimization reasons.
+     * same time of the transaction, it is recommended to use the method
+     * prepareIncreaseCounters(byte, Map) for optimization reasons.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * @param sfi SFI of the EF to select.
      * @param counterNumber The number of the counter (must be zero in case of a
@@ -506,8 +496,8 @@ public:
      * modifications buffer size and the multiple session is not allowed.
      * @since 1.0.0
      */
-    virtual T& prepareIncreaseCounter(
-        const uint8_t sfi, const int counterNumber, const int incValue)
+    virtual T&
+    prepareIncreaseCounter(std::uint8_t sfi, int counterNumber, int incValue)
         = 0;
 
     /**
@@ -518,8 +508,8 @@ public:
      * <p>The decision to execute one or the other command is made according to
      * the type of card.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in  CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * @param sfi SFI of the EF to select.
      * @param counterNumberToIncValueMap The map containing the counter numbers
@@ -532,8 +522,7 @@ public:
      * @since 1.1.0
      */
     virtual T& prepareIncreaseCounters(
-        const uint8_t sfi,
-        const std::map<const int, const int>& counterNumberToIncValueMap)
+        std::uint8_t sfi, const std::map<int, int>& counterNumberToIncValueMap)
         = 0;
 
     /**
@@ -541,8 +530,8 @@ public:
      * counter.
      *
      * <p>If several counters of the same file have to be decremented at the
-     * same time of the transaction, it is recommended to use the method {@link
-     * #prepareDecreaseCounters(byte, Map)} for optimization reasons.
+     * same time of the transaction, it is recommended to use the method
+     * prepareDecreaseCounters(byte, Map) for optimization reasons.
      *
      * <p>Data will be available in {@link CalypsoCard} using the dedicated file
      * and data management methods.
@@ -559,8 +548,8 @@ public:
      * modifications buffer size and the multiple session is not allowed.
      * @since 1.0.0
      */
-    virtual T& prepareDecreaseCounter(
-        const uint8_t sfi, const int counterNumber, const int decValue)
+    virtual T&
+    prepareDecreaseCounter(std::uint8_t sfi, int counterNumber, int decValue)
         = 0;
 
     /**
@@ -571,8 +560,8 @@ public:
      * <p>The decision to execute one or the other command is made according to
      * the type of card.
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * @param sfi SFI of the EF to select.
      * @param counterNumberToDecValueMap The map containing the counter numbers
@@ -585,8 +574,7 @@ public:
      * @since 1.1.0
      */
     virtual T& prepareDecreaseCounters(
-        const uint8_t sfi,
-        const std::map<const int, const int>& counterNumberToDecValueMap)
+        std::uint8_t sfi, const std::map<int, int>& counterNumberToDecValueMap)
         = 0;
 
     /**
@@ -597,8 +585,8 @@ public:
      * the difference between the current value and the desired value is
      * negative (Increase) or positive (Decrease).
      *
-     * <p>Data will be available in {@link CalypsoCard} using the dedicated file
-     * and data management methods.
+     * <p>Data will be available in CalypsoCard using the dedicated file and
+     * data management methods.
      *
      * <p>Note: it is assumed here that:<br>
      *
@@ -624,9 +612,8 @@ public:
      * modifications buffer size and the multiple session is not allowed.
      * @since 1.0.0
      */
-    virtual T& prepareSetCounter(
-        const uint8_t sfi, const int counterNumber, const int newValue)
-        = 0;
+    virtual T&
+    prepareSetCounter(std::uint8_t sfi, int counterNumber, int newValue) = 0;
 
     /**
      * Schedules the execution of "Read Records" commands to read all SV logs.
@@ -645,8 +632,8 @@ public:
      *
      * <p>Data will be available in {@link CalypsoCard} in raw format using the
      * dedicated file and data management methods or in the form of dedicated
-     * objects using the {@link CalypsoCard#getSvLoadLogRecord()} and {@link
-     * CalypsoCard#getSvDebitLogAllRecords()} methods.
+     * objects using the CalypsoCard#getSvLoadLogRecord() and
+     * CalypsoCard::getSvDebitLogAllRecords() methods.
      *
      * @return The current instance.
      * @throw UnsupportedOperationException If the SV feature is not available
@@ -676,7 +663,7 @@ public:
      * range.
      * @since 1.6.0
      */
-    virtual T& prepareVerifyPin(const std::vector<uint8_t>& pin) = 0;
+    virtual T& prepareVerifyPin(const std::vector<std::uint8_t>& pin) = 0;
 
     /**
      * Schedules the execution of a "Change PIN" command to replace the current
@@ -684,14 +671,14 @@ public:
      *
      * <p>This command can be performed only out of a secure session. The new
      * PIN code can be transmitted in plain text or encrypted according to the
-     * parameter set in {@link SymmetricCryptoSecuritySetting}.
+     * parameter set in SymmetricCryptoSecuritySetting.
      *
      * <p>When the PIN is transmitted plain, this command must be preceded by a
-     * successful Verify PIN command (see {@link #prepareVerifyPin(byte[])}).
+     * successful Verify PIN command (see prepareVerifyPin(byte[])).
      *
-     * <p>The PIN status will be available in {@link CalypsoCard} using the
-     * {@link CalypsoCard#getPinAttemptRemaining()} and {@link
-     * CalypsoCard#isPinBlocked()} methods.
+     * <p>The PIN status will be available in CalypsoCard using the
+     * CalypsoCard::getPinAttemptRemaining() and  CalypsoCard::isPinBlocked()
+     * methods.
      *
      * @param newPin The new PIN code value (4-byte long byte array).
      * @return The current instance.
@@ -703,6 +690,18 @@ public:
      * @since 1.6.0
      */
     virtual T& prepareChangePin(const std::vector<uint8_t>& newPin) = 0;
+
+    /**
+     * Schedules the execution of a "Generate Asymmetric Key Pair" command.
+     *
+     * <p>After the execution, the generated key pair will be stored internally
+     * into the card. The public part can be retrieved via
+     * prepareGetData(GetDataTag).
+     *
+     * @return The current instance.
+     * @since 2.1.0
+     */
+    virtual T& prepareGenerateAsymmetricKeyPair() = 0;
 
     /**
      * Processes all previously prepared commands and closes the physical
@@ -725,6 +724,7 @@ public:
      * @throw CardIOException If a communication error with the card occurs.
      * @throw CryptoIOException If a communication error with the cryptographic
      * module occurs.
+     * @throw CryptoException If an error with the cryptographic module occurs.
      * @throw UnexpectedCommandStatusException If a command returns an
      * unexpected status.
      * @throw InconsistentDataException If inconsistent data have been detected.
@@ -743,7 +743,7 @@ public:
      * indicated that the file was not found.
      * @since 1.6.0
      */
-    virtual T processCommands(const ChannelControl channelControl) = 0;
+    virtual T& processCommands(ChannelControl channelControl) = 0;
 
     /**
      * Returns the audit data of the transaction containing all APDU exchanges
@@ -752,7 +752,8 @@ public:
      * @return An empty list if there is no audit data.
      * @since 1.2.0
      */
-    const st::vector<std::vector<uint8_t>>& getTransactionAuditData() const = 0;
+    virtual const std::vector<std::vector<std::uint8_t>>&
+    getTransactionAuditData() const = 0;
 };
 
 } /* namespace transaction */

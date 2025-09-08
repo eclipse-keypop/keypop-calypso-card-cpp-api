@@ -10,27 +10,31 @@
 
 #pragma once
 
+#include "keypop/calypso/card/cpp/SecureRegularModeTransactionManagerBase.hpp"
+
 namespace keypop {
 namespace calypso {
 namespace card {
 namespace transaction {
 
+using keypop::calypso::card::cpp::SecureRegularModeTransactionManagerBase;
+
 /**
  * Manager of card transactions secured by symmetric key cryptographic
  * algorithms, compatible with all Calypso products.
  *
- * <p>See {@link SecureSymmetricCryptoTransactionManager} parent interface for
+ * <p>See SecureSymmetricCryptoTransactionManager parent interface for
  * more information and details of available card operations.
  *
- * <p>An instance of this interface can be obtained via the method {@link
- * CalypsoCardApiFactory#createSecureRegularModeTransactionManager(CardReader,
- * CalypsoCard, SymmetricCryptoSecuritySetting)}.
+ * <p>An instance of this interface can be obtained via the method
+ * CalypsoCardApiFactory::createSecureRegularModeTransactionManager(CardReader,
+ * CalypsoCard, SymmetricCryptoSecuritySetting).
  *
  * @since 2.0.0
  */
 template <typename T>
 class SecureRegularModeTransactionManager
-: public SecureRegularModeTransactionManager<T> {
+: public SecureRegularModeTransactionManagerBase {
 public:
     /**
      * Virtual destructor.

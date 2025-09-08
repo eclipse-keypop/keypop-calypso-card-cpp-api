@@ -18,8 +18,8 @@ namespace spi {
 
 /**
  * Card transaction manager factory provided by crypto extensions to secure
- * Calypso card transactions secured by "asymmetric" key cryptographic
- * algorithms (e.g. PKI).
+ * Calypso card transactions secured by asymmetric key cryptographic
+ * algorithms (PKI).
  *
  * @since 2.0.0
  */

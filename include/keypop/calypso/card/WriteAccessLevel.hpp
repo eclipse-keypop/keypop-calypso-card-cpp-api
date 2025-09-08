@@ -50,7 +50,12 @@ enum class WriteAccessLevel {
      *
      * @since 1.0.0
      */
-    DEBIT
+    DEBIT,
+
+    /**
+     * Replace Java null
+     */
+    UNKOWN,
 };
 
 } /* namespace card */

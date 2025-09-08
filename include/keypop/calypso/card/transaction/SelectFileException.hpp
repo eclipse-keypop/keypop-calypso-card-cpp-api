@@ -39,9 +39,8 @@ public:
      * @since 1.4.0
      */
     SelectFileException(
-        const std::string& message, const std::shared_ptr<std::exception> cause)
+        const std::string& message, const std::exception& /*cause*/)
     : std::runtime_error(message) {
-        (void)cause;
     }
 };
 

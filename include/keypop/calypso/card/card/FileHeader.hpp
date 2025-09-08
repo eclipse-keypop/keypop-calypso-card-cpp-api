@@ -44,7 +44,7 @@ public:
      * with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
-    virtual const std::shared_ptr<uint8_t> getDfStatus() const = 0;
+    virtual const std::shared_ptr<uint8_t>& getDfStatus() const = 0;
 
     /**
      * Gets the Elementary File type.
@@ -91,7 +91,7 @@ public:
      * Data" command with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t>& getAccessConditions() const = 0;
+    virtual const std::vector<std::uint8_t>& getAccessConditions() const = 0;
 
     /**
      * Gets a reference to the keys indexes.
@@ -101,7 +101,7 @@ public:
      * command with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t>& getKeyIndexes() const = 0;
+    virtual const std::vector<std::uint8_t>& getKeyIndexes() const = 0;
 
     /**
      * Gets the non-zero unique identifier of the shared data when the file data
@@ -112,7 +112,7 @@ public:
      * response to a "Get Data" command with the GetDataTag::EF_LIST tag).
      * @since 1.0.0
      */
-    virtual const std::shared_ptr<uint16_t> getSharedReference() const = 0;
+    virtual const std::shared_ptr<std::uint16_t> getSharedReference() const = 0;
 };
 
 } /* namespace card */

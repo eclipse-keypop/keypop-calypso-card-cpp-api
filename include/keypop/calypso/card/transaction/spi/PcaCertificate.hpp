@@ -10,35 +10,30 @@
 
 #pragma once
 
-#include <string>
-
 namespace keypop {
 namespace calypso {
 namespace card {
+namespace transaction {
+namespace spi {
 
 /**
- * API properties.
+ * Marker interface for PCA certificate.
  *
- * @since 2.0.0
+ * <p>The implementation of this interface is provided by the Keypop extensions
+ * for asymmetric cryptography.
+ *
+ * @since 2.1.0
  */
-// class CalypsoCardApiProperties final {
-// public:
-//     /**
-//      * API version: {@value}
-//      *
-//      * @since 1.0.0
-//      */
-//     static const std::string VERSION;
+class PcaCertificate {
+public:
+    /**
+     * Virtual destructor
+     */
+    virtual ~PcaCertificate() = default;
+};
 
-// private:
-//     /**
-//      * Private constructor
-//      */
-//     CalypsoCardApiProperties() {}
-// };
-
-static const std::string& CalypsoCardApiProperties_VERSION = "2.1";
-
+} /* namespace spi */
+} /* namespace transaction */
 } /* namespace card */
 } /* namespace calypso */
 } /* namespace keypop */

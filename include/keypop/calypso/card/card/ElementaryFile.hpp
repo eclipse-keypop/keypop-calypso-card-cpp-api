@@ -15,7 +15,7 @@
 #include <ostream>
 #include <vector>
 
-#include "keypop/calypso/caard/card/FileData.hpp"
+#include "keypop/calypso/card/card/FileData.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -94,7 +94,7 @@ public:
      * @return Null if header is not yet set.
      * @since 1.0.0
      */
-    virtual const std::shared_ptr<FileHeader> getHeader() const = 0;
+    virtual std::shared_ptr<FileHeader> getHeader() const = 0;
 
     /**
      * Gets the file data.

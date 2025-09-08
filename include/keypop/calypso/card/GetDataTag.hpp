@@ -18,7 +18,7 @@ namespace calypso {
 namespace card {
 
 /**
- * Enumeration of all supported tags for the Get Data command.
+ * Enumeration of all output data types.
  *
  * <p>May not be applicable to all products.
  *
@@ -51,7 +51,28 @@ enum class GetDataTag {
      *
      * @since 1.1.0
      */
-    TRACEABILITY_INFORMATION
+    TRACEABILITY_INFORMATION,
+
+    /**
+     * Card public key.
+     *
+     * @since 2.1.0
+     */
+    CARD_PUBLIC_KEY,
+
+    /**
+     * Card certificate.
+     *
+     * @since 2.1.0
+     */
+    CARD_CERTIFICATE,
+
+    /**
+     * Certification Authority (CA) certificate.
+     *
+     * @since 2.1.0
+     */
+    CA_CERTIFICATE
 };
 
 } /* namespace card */

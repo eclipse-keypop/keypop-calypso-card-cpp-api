@@ -12,35 +12,38 @@
 
 #include <memory>
 
+#include "keypop/calypso/card/transaction/TransactionManager.hpp"
+#include "keypop/calypso/card/transaction/spi/CardTransactionCryptoExtension.hpp"
+
 namespace keypop {
 namespace calypso {
 namespace card {
 namespace transaction {
 
+using keypop::calypso::card::transaction::spi::CardTransactionCryptoExtension;
+
 /**
  * Contains operations common to all card transactions secured by cryptographic
  * algorithms.
  *
- * <p>See {@link TransactionManager} parent interface for more information and
- * details of others available card operations.
+ * <p>See TransactionManager parent interface for more information and details
+ * of others available card operations.
  *
  * @param <T> The type of the lowest level child object.
  * @since 2.0.0
  */
 template <typename T>
-class SecureTransactionManager : public SecureTransactionManager<T> {
+class SecureTransactionManager : public virtual TransactionManager<T> {
 public:
     /**
-     * Returns the associated {@link CardTransactionCryptoExtension} instance.
+     * Returns the associated CardTransactionCryptoExtension instance.
      *
-     * @param cryptoExtensionClass The class of the crypto extension.
-     * @param <E> The generic type of the expected crypto extension.
-     * @return A non-null {@link CardTransactionCryptoExtension}.
+     * @return A non-null CardTransactionCryptoExtension.
      * @throw IllegalArgumentException If the provided class is null.
      * @since 2.0.0
      */
-    virtual std::shared_ptr<CardTransactionCryptoExtension>
-    getCryptoExtension(const std::type_info& cryptoExtensionClass) = 0;
+    // template <typename E>
+    // virtual std::shared_ptr<E> getCryptoExtension() = 0; // FIXME
 
     /**
      * Schedules the execution of a "Close Secure Session" command.
