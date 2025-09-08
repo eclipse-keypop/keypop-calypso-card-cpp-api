@@ -71,47 +71,48 @@ $(function() {
   <div class="headertitle"><div class="title">InvalidCardSignatureException.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_invalid_card_signature_exception_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**************************************************************************************************</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2024 Calypso Networks Association https://calypsonet.org/                        *</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *                                                                                                *</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * This program and the accompanying materials are made available under the                       *</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * terms of the MIT License which is available at https://opensource.org/licenses/MIT.            *</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *                                                                                                *</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * SPDX-License-Identifier: MIT                                                                   *</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> **************************************************************************************************/</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekeypop.html">keypop</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>calypso {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span>card {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>transaction {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html">   38</a></span><span class="keyword">class </span><a class="code hl_class" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html">InvalidCardSignatureException</a> final : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a99cb75b40b5ed5890eb402dee7ed8b22">   44</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a99cb75b40b5ed5890eb402dee7ed8b22">InvalidCardSignatureException</a>(<span class="keyword">const</span> std::string&amp; message)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    : std::runtime_error(message) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a066bc501d004f6beef01c45602a52d55">   55</a></span>    <a class="code hl_function" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a066bc501d004f6beef01c45602a52d55">InvalidCardSignatureException</a>(</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">const</span> std::string&amp; message, <span class="keyword">const</span> std::shared_ptr&lt;std::exception&gt; cause)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    : std::runtime_error(message) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        (void)cause;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>};</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>} <span class="comment">/* namespace transaction */</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>} <span class="comment">/* namespace card */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>} <span class="comment">/* namespace calypso */</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>} <span class="comment">/* namespace keypop */</span></div>
-<div class="ttc" id="aclasskeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception_html"><div class="ttname"><a href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html">keypop::calypso::card::transaction::InvalidCardSignatureException</a></div><div class="ttdef"><b>Definition:</b> <a href="_invalid_card_signature_exception_8hpp_source.html#l00038">InvalidCardSignatureException.hpp:38</a></div></div>
-<div class="ttc" id="aclasskeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception_html_a066bc501d004f6beef01c45602a52d55"><div class="ttname"><a href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a066bc501d004f6beef01c45602a52d55">keypop::calypso::card::transaction::InvalidCardSignatureException::InvalidCardSignatureException</a></div><div class="ttdeci">InvalidCardSignatureException(const std::string &amp;message, const std::shared_ptr&lt; std::exception &gt; cause)</div><div class="ttdef"><b>Definition:</b> <a href="_invalid_card_signature_exception_8hpp_source.html#l00055">InvalidCardSignatureException.hpp:55</a></div></div>
-<div class="ttc" id="aclasskeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception_html_a99cb75b40b5ed5890eb402dee7ed8b22"><div class="ttname"><a href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a99cb75b40b5ed5890eb402dee7ed8b22">keypop::calypso::card::transaction::InvalidCardSignatureException::InvalidCardSignatureException</a></div><div class="ttdeci">InvalidCardSignatureException(const std::string &amp;message)</div><div class="ttdef"><b>Definition:</b> <a href="_invalid_card_signature_exception_8hpp_source.html#l00044">InvalidCardSignatureException.hpp:44</a></div></div>
-<div class="ttc" id="anamespacekeypop_html"><div class="ttname"><a href="namespacekeypop.html">keypop</a></div><div class="ttdef"><b>Definition:</b> <a href="_calypso_card_api_factory_8hpp_source.html#l00022">CalypsoCardApiFactory.hpp:22</a></div></div>
+<a href="_invalid_card_signature_exception_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/******************************************************************************</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2025 Calypso Networks Association https://calypsonet.org/    *</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *                                                                            *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * This program and the accompanying materials are made available under the   *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * terms of the MIT License which is available at                             *</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * https://opensource.org/licenses/MIT.                                       *</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *                                                                            *</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * SPDX-License-Identifier: MIT                                               *</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> ******************************************************************************/</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekeypop.html">keypop</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span>calypso {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>card {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span>transaction {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html">   40</a></span><span class="keyword">class </span><a class="code hl_class" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html">InvalidCardSignatureException</a> final : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a99cb75b40b5ed5890eb402dee7ed8b22">   46</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a99cb75b40b5ed5890eb402dee7ed8b22">InvalidCardSignatureException</a>(<span class="keyword">const</span> std::string&amp; message)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    : std::runtime_error(message) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a066bc501d004f6beef01c45602a52d55">   57</a></span>    <a class="code hl_function" href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a066bc501d004f6beef01c45602a52d55">InvalidCardSignatureException</a>(</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keyword">const</span> std::string&amp; message, <span class="keyword">const</span> std::shared_ptr&lt;std::exception&gt; cause)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    : std::runtime_error(message) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        (void)cause;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>} <span class="comment">/* namespace transaction */</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>} <span class="comment">/* namespace card */</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>} <span class="comment">/* namespace calypso */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>} <span class="comment">/* namespace keypop */</span></div>
+<div class="ttc" id="aclasskeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception_html"><div class="ttname"><a href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html">keypop::calypso::card::transaction::InvalidCardSignatureException</a></div><div class="ttdef"><b>Definition:</b> <a href="_invalid_card_signature_exception_8hpp_source.html#l00040">InvalidCardSignatureException.hpp:40</a></div></div>
+<div class="ttc" id="aclasskeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception_html_a066bc501d004f6beef01c45602a52d55"><div class="ttname"><a href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a066bc501d004f6beef01c45602a52d55">keypop::calypso::card::transaction::InvalidCardSignatureException::InvalidCardSignatureException</a></div><div class="ttdeci">InvalidCardSignatureException(const std::string &amp;message, const std::shared_ptr&lt; std::exception &gt; cause)</div><div class="ttdef"><b>Definition:</b> <a href="_invalid_card_signature_exception_8hpp_source.html#l00057">InvalidCardSignatureException.hpp:57</a></div></div>
+<div class="ttc" id="aclasskeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception_html_a99cb75b40b5ed5890eb402dee7ed8b22"><div class="ttname"><a href="classkeypop_1_1calypso_1_1card_1_1transaction_1_1_invalid_card_signature_exception.html#a99cb75b40b5ed5890eb402dee7ed8b22">keypop::calypso::card::transaction::InvalidCardSignatureException::InvalidCardSignatureException</a></div><div class="ttdeci">InvalidCardSignatureException(const std::string &amp;message)</div><div class="ttdef"><b>Definition:</b> <a href="_invalid_card_signature_exception_8hpp_source.html#l00046">InvalidCardSignatureException.hpp:46</a></div></div>
+<div class="ttc" id="anamespacekeypop_html"><div class="ttname"><a href="namespacekeypop.html">keypop</a></div><div class="ttdef"><b>Definition:</b> <a href="_calypso_card_api_factory_8hpp_source.html#l00023">CalypsoCardApiFactory.hpp:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
