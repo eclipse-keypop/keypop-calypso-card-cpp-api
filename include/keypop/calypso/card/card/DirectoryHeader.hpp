@@ -30,6 +30,11 @@ namespace card {
 class DirectoryHeader {
 public:
     /**
+     * Virtual destructor.
+     */
+    virtual ~DirectoryHeader() = default;
+
+    /**
      * Gets the associated LID.
      *
      * @return The LID.

@@ -10,34 +10,42 @@
 
 #pragma once
 
-#include <string>
+#include <memory>
+#include <stdexcept>
 
 namespace keypop {
 namespace calypso {
 namespace card {
 
 /**
- * API properties.
+ * Enumeration of all input data types.
  *
- * @since 2.0.0
+ * <p>May not be applicable to all products.
+ *
+ * @since 2.1.0
  */
-// class CalypsoCardApiProperties final {
-// public:
-//     /**
-//      * API version: {@value}
-//      *
-//      * @since 1.0.0
-//      */
-//     static const std::string VERSION;
+enum class PutDataTag {
+    /**
+     * Card key pair.
+     *
+     * @since 2.1.0
+     */
+    CARD_KEY_PAIR,
 
-// private:
-//     /**
-//      * Private constructor
-//      */
-//     CalypsoCardApiProperties() {}
-// };
+    /**
+     * Card certificate.
+     *
+     * @since 2.1.0
+     */
+    CARD_CERTIFICATE,
 
-static const std::string& CalypsoCardApiProperties_VERSION = "2.1";
+    /**
+     * Certification Authority (CA) certificate.
+     *
+     * @since 2.1.0
+     */
+    CA_CERTIFICATE
+};
 
 } /* namespace card */
 } /* namespace calypso */

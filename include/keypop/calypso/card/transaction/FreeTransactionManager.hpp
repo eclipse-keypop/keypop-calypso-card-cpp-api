@@ -13,7 +13,7 @@
 #include <memory>
 #include <stdexcept>
 
-#include "keypop/calypso/card/TransactionManager.hpp"
+#include "keypop/calypso/card/transaction/TransactionManager.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -23,22 +23,22 @@ namespace transaction {
 /**
  * Manager of card transactions requiring no cryptographic computation.
  *
- * <p>See {@link TransactionManager} parent interface for more information and
+ * <p>See TransactionManager parent interface for more information and
  * details of available card operations.
  *
- * <p>An instance of this interface can be obtained via the method {@link
- * CalypsoCardApiFactory#createFreeTransactionManager(CardReader, CalypsoCard)}.
+ * <p>An instance of this interface can be obtained via the method
+ * CalypsoCardApiFactory::createFreeTransactionManager(CardReader, CalypsoCard).
  *
  * @since 2.0.0
  */
-template <typename T>
-class FreeTransactionManager : public TransactionManager<T> {
+class FreeTransactionManager
+: public virtual TransactionManager<FreeTransactionManager> {
 public:
     /**
      * Virtual destructor.
      */
     virtual ~FreeTransactionManager() = default;
-}
+};
 
 } /* namespace transaction */
 } /* namespace card */

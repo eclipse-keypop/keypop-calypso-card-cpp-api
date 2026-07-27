@@ -12,9 +12,10 @@
 
 #include <vector>
 
-#include "keypop/calypso/card/SvAction.hpp"
-#include "keypop/calypso/card/SvOperation.hpp"
 #include "keypop/calypso/card/WriteAccessLevel.hpp"
+#include "keypop/calypso/card/transaction/SecureTransactionManager.hpp"
+#include "keypop/calypso/card/transaction/SvAction.hpp"
+#include "keypop/calypso/card/transaction/SvOperation.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -33,7 +34,7 @@ namespace transaction {
  */
 template <typename T>
 class SecureSymmetricCryptoTransactionManager
-: public SecureTransactionManager<T> {
+: public virtual SecureTransactionManager<T> {
 public:
     /**
      * Schedules the execution of an "Open Secure Session" command.
@@ -86,8 +87,7 @@ public:
      * @since 1.0.0
      */
     virtual T&
-    prepareSvGet(const SvOperation svOperation, const SvAction svAction)
-        = 0;
+    prepareSvGet(const SvOperation svOperation, const SvAction svAction) = 0;
 
     /**
      * Schedules the execution of a "SV Reload" command to increase the current
@@ -122,8 +122,7 @@ public:
         const int amount,
         const std::vector<uint8_t>& date,
         const std::vector<uint8_t>& time,
-        const std::vector<uint8_t>& free)
-        = 0;
+        const std::vector<uint8_t>& free) = 0;
 
     /**
      * Schedules the execution of a "SV Reload" command to increase the current
@@ -191,8 +190,7 @@ public:
     virtual T& prepareSvDebit(
         const int amount,
         const std::vector<uint8_t>& date,
-        const std::vector<uint8_t>& time)
-        = 0;
+        const std::vector<uint8_t>& time) = 0;
 
     /**
      * Schedules the execution of a "SV Debit" or "SV Undebit" command to
@@ -297,8 +295,7 @@ public:
         const uint8_t newKif,
         const uint8_t newKvc,
         const uint8_t issuerKif,
-        const uint8_t issuerKvc)
-        = 0;
+        const uint8_t issuerKvc) = 0;
 };
 
 } /* namespace transaction */

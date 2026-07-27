@@ -14,8 +14,13 @@
 #include <map>
 #include <memory>
 #include <ostream>
+#include <string>
 #include <vector>
 
+#include "keypop/calypso/card/card/DirectoryHeader.hpp"
+#include "keypop/calypso/card/card/ElementaryFile.hpp"
+#include "keypop/calypso/card/card/SvDebitLogRecord.hpp"
+#include "keypop/calypso/card/card/SvLoadLogRecord.hpp"
 #include "keypop/reader/selection/spi/IsoSmartCard.hpp"
 
 namespace keypop {
@@ -23,9 +28,11 @@ namespace calypso {
 namespace card {
 namespace card {
 
+using keypop::reader::selection::spi::IsoSmartCard;
+
 /**
- * Extends the {@link IsoSmartCard} interface of the "Keypop Reader API" to
- * provide additional functionality specific to Calypso cards.
+ * Extends the IsoSmartCard interface of the "Keypop Reader API" to provide
+ * additional functionality specific to Calypso cards.
  *
  * <p>An instance of {@code CalypsoCard} is obtained by casting the {@link
  * IsoSmartCard} object from the selection process defined by the "Keypop Reader
@@ -37,8 +44,8 @@ namespace card {
  * <p>The various information contained in CalypsoCard includes:
  *
  * <ul>
- *   <li>The application identification fields (revision/version, class, DF name, serial number,
- *       ATR, issuer)
+ *   <li>The application identification fields (revision/version, class, DF
+ *       name, serial number, ATR, issuer)
  *   <li>The indication of the presence of optional features (Stored Value, PIN,
  * Rev3.2 mode, ratification management) <li>The management information of the
  * modification buffer <li>The invalidation status <li>The files, counters, SV
@@ -138,7 +145,8 @@ public:
     /**
      * Gets the DF name as an array of bytes.
      *
-     * <p>The DF name is the name of the application DF as defined in ISO/IEC 7816-4.
+     * <p>The DF name is the name of the application DF as defined in ISO/IEC
+     * 7816-4.
      *
      * <p>It also corresponds to the complete representation of the target
      * covered by the AID value provided in the selection command.
@@ -248,6 +256,39 @@ public:
     virtual const std::vector<uint8_t> getTraceabilityInformation() const = 0;
 
     /**
+     * Returns the card public key.
+     *
+     * @return An empty array if the public key is not available.
+     * @see CalypsoCardSelectionExtension#prepareGetData(GetDataTag)
+     * @see TransactionManager#prepareGetData(GetDataTag)
+     * @see SecurePkiModeTransactionManager#prepareOpenSecureSession()
+     * @since 2.1.0
+     */
+    virtual const std::vector<std::uint8_t>& getCardPublicKey() const = 0;
+
+    /**
+     * Returns the card certificate.
+     *
+     * @return An empty array if the public key is not available.
+     * @see CalypsoCardSelectionExtension#prepareGetData(GetDataTag)
+     * @see TransactionManager#prepareGetData(GetDataTag)
+     * @see SecurePkiModeTransactionManager#prepareOpenSecureSession()
+     * @since 2.1.0
+     */
+    virtual const std::vector<std::uint8_t>& getCardCertificate() const = 0;
+
+    /**
+     * Returns the CA certificate.
+     *
+     * @return An empty array if the public key is not available.
+     * @see CalypsoCardSelectionExtension#prepareGetData(GetDataTag)
+     * @see TransactionManager#prepareGetData(GetDataTag)
+     * @see SecurePkiModeTransactionManager#prepareOpenSecureSession()
+     * @since 2.1.0
+     */
+    virtual const std::vector<std::uint8_t>& getCaCertificate() const = 0;
+
+    /**
      * Returns the metadata of the current DF.
      *
      * @return Null if is not set.
@@ -257,8 +298,8 @@ public:
      * @see TransactionManager#prepareSelectFile(SelectFileControl)
      * @since 1.0.0
      */
-    virtual const std::shared_ptr<DirectoryHeader>
-    getDirectoryHeader() const = 0;
+    virtual const std::shared_ptr<DirectoryHeader> getDirectoryHeader() const
+        = 0;
 
     /**
      * Returns a reference to the ElementaryFile that has the provided SFI.
@@ -291,22 +332,6 @@ public:
     getFileByLid(const uint16_t lid) const = 0;
 
     /**
-     * Returns a reference to a map of all known Elementary Files by their
-     * associated SFI.
-     *
-     * <p>Note that if a secure session is actually running, then the map
-     * contains all session modifications, which can be canceled if the secure
-     * session fails.
-     *
-     * @return A not null reference (it may be empty if no one EF is set).
-     * @since 1.0.0
-     * @deprecated Since an EF may not have an SFI, the getFiles() method must
-     * be used instead.
-     */
-    virtual const std::map<const uint8_t, const std::shared_ptr<ElementaryFile>>
-    getAllFiles() const = 0;
-
-    /**
      * Returns a reference to the set of all known Elementary Files contains
      * inside the current DF.
      *
@@ -317,8 +342,8 @@ public:
      * @return A not null reference (it may be empty if no one EF is set).
      * @since 1.1.0
      */
-    virtual const std::vector<std::shared_ptr<ElementaryFile>>&
-    getFiles() const = 0;
+    virtual const std::vector<std::shared_ptr<ElementaryFile>>& getFiles() const
+        = 0;
 
     /**
      * Tells if the last session with this card has been ratified or not.
@@ -339,15 +364,17 @@ public:
      *
      * <p>Please note that there are other commands that can decrement the
      * original card counter (e.g.
-     * Change Key, Change/Verify PIN, SV Debit/Undebit/Reload). For these other commands, the counter
-     * value returned by this method will not be updated.
+     * Change Key, Change/Verify PIN, SV Debit/Undebit/Reload). For these othe
+     * commands, the counter value returned by this method will not be updated.
      *
      * @return A positive value.
      * @throws IllegalStateException If no session has been opened.
      * @see
-     * CalypsoCardSelectionExtension#preparePreOpenSecureSession(WriteAccessLevel)
+     * CalypsoCardSelectionExtension#
+     * preparePreOpenSecureSession(WriteAccessLevel)
      * @see
-     * SecureSymmetricCryptoTransactionManager#prepareOpenSecureSession(WriteAccessLevel)
+     * SecureSymmetricCryptoTransactionManager
+     * #prepareOpenSecureSession(WriteAccessLevel)
      * @since 1.2.0
      */
     virtual int getTransactionCounter() const = 0;
@@ -516,6 +543,9 @@ public:
      */
     virtual const std::vector<std::shared_ptr<SvDebitLogRecord>>
     getSvDebitLogAllRecords() const = 0;
+
+    /** */
+    inline operator std::string();
 };
 
 inline std::ostream&

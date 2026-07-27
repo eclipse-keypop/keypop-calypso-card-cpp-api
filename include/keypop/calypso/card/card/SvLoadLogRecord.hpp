@@ -40,7 +40,7 @@ public:
      * @return A 2-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getLoadDate() const = 0;
+    virtual std::vector<uint8_t> getLoadDate() const = 0;
 
     /**
      * Gets the load time as an array of bytes
@@ -48,7 +48,7 @@ public:
      * @return A 2-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getLoadTime() const = 0;
+    virtual std::vector<uint8_t> getLoadTime() const = 0;
 
     /**
      * Gets the load amount value
@@ -72,7 +72,7 @@ public:
      * @return A 2-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getFreeData() const = 0;
+    virtual std::vector<uint8_t> getFreeData() const = 0;
 
     /**
      * Gets the KVC of the load key (as given in the last SV Reload)
@@ -88,7 +88,7 @@ public:
      * @return A 4-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getSamId() const = 0;
+    virtual std::vector<uint8_t> getSamId() const = 0;
 
     /**
      * Gets the SAM transaction number value as an int

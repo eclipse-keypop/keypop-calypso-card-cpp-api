@@ -12,6 +12,7 @@
 
 #include <cstdint>
 
+#include "keypop/calypso/card/GetDataTag.hpp"
 #include "keypop/calypso/card/SelectFileControl.hpp"
 #include "keypop/calypso/card/WriteAccessLevel.hpp"
 #include "keypop/reader/selection/spi/CardSelectionExtension.hpp"
@@ -21,6 +22,7 @@ namespace calypso {
 namespace card {
 namespace card {
 
+using keypop::calypso::card::GetDataTag;
 using keypop::reader::selection::spi::CardSelectionExtension;
 
 /**
@@ -252,56 +254,6 @@ public:
     virtual CalypsoCardSelectionExtension&
     preparePreOpenSecureSession(const WriteAccessLevel writeAccessLevel)
         = 0;
-
-    /**
-     * Adds a specific "Open Secure Session" command to attempt a secure session
-     * pre-opening in PKI mode. For cards that support this feature, this
-     * optimizes future exchanges with the card in the case of secure sessions
-     * intended to be executed in a single step.
-     *
-     * <p>The objective of the pre-opening is to allow the grouping of all the
-     * commands of a secure session. This functionality is only relevant in the
-     * case of a distributed system where the ticketing processing is done
-     * remotely in order to allow a complete secure session to be carried out in
-     * a single exchange between the server and the terminal.
-     *
-     * <p>This mechanism is based on the anticipation of the APDU responses of
-     * the card.
-     *
-     * <p>In order to achieve the objective of a single exchange, it is
-     * essential to read locally beforehand (out of session) all the data that
-     * will have to be read in session. If not, additional exchanges will be
-     * made.
-     *
-     * <p>Then, the remote ticketing processing must prepare all the commands of
-     * the session (from opening to closing) before executing it.
-     *
-     * <p>Example:
-     *
-     * <pre>{@code
-     * transaction
-     *   .preparePreOpenSecureSessionInPkiMode(...)
-     *   .prepare...
-     *   [...]
-     *   .prepare...
-     *   .prepareCloseSecureSession()
-     *   .processCommands(...);
-     * }</pre>
-     *
-     * Caution: this feature will be ineffective in the following cases:
-     *
-     * <ul>
-     *   <li>the card or the cryptographic module does not support the PKI mode
-     *   <li>an intermediate "processCommand(...)" call has been made
-     *   <li>the session uses symmetric cryptography
-     * </ul>
-     *
-     * @return The current instance.
-     * @throw IllegalArgumentException If writeAccessLevel is null.
-     * @throw IllegalStateException If "Pre-Open" command is already prepared.
-     * @since 2.0.0
-     */
-    // CalypsoCardSelectionExtension preparePreOpenSecureSessionInPkiMode();
 };
 
 } /* namespace card */

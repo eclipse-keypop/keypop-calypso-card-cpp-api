@@ -10,32 +10,26 @@
 
 #pragma once
 
-#include <memory>
-#include <stdexcept>
-#include <string>
+#include "keypop/calypso/card/transaction/SecureTransactionManager.hpp"
 
 namespace keypop {
 namespace calypso {
 namespace card {
-namespace transaction {
+namespace cpp {
 
-/**
- * Indicates that the card is revoked.
- *
- * @since 1.0.0
- */
-class CardRevokedException final : public std::runtime_error {
+using keypop::calypso::card::transaction::SecureTransactionManager;
+
+class SecureRegularModeTransactionManagerBase
+: public virtual SecureTransactionManager<
+      SecureRegularModeTransactionManagerBase> {
 public:
     /**
-     * @param message The message to identify the exception context.
-     * @since 1.0.0
+     * virtual destructor.
      */
-    explicit CardRevokedException(const std::string& message)
-    : std::runtime_error(message) {
-    }
+    virtual ~SecureRegularModeTransactionManagerBase() = default;
 };
 
-} /* namespace transaction */
+} /* namespace cpp */
 } /* namespace card */
 } /* namespace calypso */
 } /* namespace keypop */

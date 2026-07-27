@@ -12,7 +12,7 @@
 
 #include <cstdint>
 
-#include "keypop/calypso/card/WriteAccesLevel.hpp"
+#include "keypop/calypso/card/WriteAccessLevel.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -23,14 +23,19 @@ namespace transaction {
  * Security setting for a Calypso card transaction secured by "symmetric" key
  * cryptographic algorithms (e.g. SAM).
  *
- * <p>An instance of this interface can be obtained via the method {@link
+ * <p>An instance of this interface can be obtained via the method
  * CalypsoCardApiFactory::createSymmetricCryptoSecuritySetting(
- *     SymmetricCryptoCardTransactionManagerFactory)}.
+ *     SymmetricCryptoCardTransactionManagerFactory).
  *
  * @since 2.0.0
  */
 class SymmetricCryptoSecuritySetting {
 public:
+    /**
+     * Virtual destructor.
+     */
+    virtual ~SymmetricCryptoSecuritySetting() = default;
+
     /**
      * Enables multiple session mode to allow more changes to the card than the
      * session buffer can handle.
@@ -105,9 +110,7 @@ public:
      * @since 1.0.0
      */
     virtual SymmetricCryptoSecuritySetting& assignKif(
-        const WriteAccessLevel writeAccessLevel,
-        const uint8_t kvc,
-        const uint8_t kif)
+        WriteAccessLevel writeAccessLevel, std::uint8_t kvc, std::uint8_t kif)
         = 0;
 
     /**
@@ -151,8 +154,7 @@ public:
      * @since 1.0.0
      */
     virtual SymmetricCryptoSecuritySetting&
-    addAuthorizedSessionKey(const uint8_t kif, const uint8_t kvc)
-        = 0;
+    addAuthorizedSessionKey(const uint8_t kif, const uint8_t kvc) = 0;
 
     /**
      * Adds an authorized Stored Value key defined by its KIF and KVC values.
@@ -167,8 +169,7 @@ public:
      * @since 1.0.0
      */
     virtual SymmetricCryptoSecuritySetting&
-    addAuthorizedSvKey(const uint8_t kif, const uint8_t kvc)
-        = 0;
+    addAuthorizedSvKey(const uint8_t kif, const uint8_t kvc) = 0;
 
     /**
      * Sets the KIF/KVC pair of the PIN verification ciphering key.
@@ -181,8 +182,7 @@ public:
      * @since 1.0.0
      */
     virtual SymmetricCryptoSecuritySetting&
-    setPinVerificationCipheringKey(const uint8_t kif, const uint8_t kvc)
-        = 0;
+    setPinVerificationCipheringKey(const uint8_t kif, const uint8_t kvc) = 0;
 
     /**
      * Sets the KIF/KVC pair of the PIN modification ciphering key.
@@ -195,8 +195,7 @@ public:
      * @since 1.0.0
      */
     virtual SymmetricCryptoSecuritySetting&
-    setPinModificationCipheringKey(const uint8_t kif, const uint8_t kvc)
-        = 0;
+    setPinModificationCipheringKey(const uint8_t kif, const uint8_t kvc) = 0;
 
     /**
      * Prepares the cryptographic module for the next transaction by

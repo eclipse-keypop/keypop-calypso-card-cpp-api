@@ -32,7 +32,7 @@ public:
      * @return A byte array.
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t>& getRawData() const = 0;
+    virtual const std::vector<std::uint8_t>& getRawData() const = 0;
 
     /**
      * Gets the debit date as an array of bytes
@@ -40,7 +40,7 @@ public:
      * @return A 2-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getDebitDate() const = 0;
+    virtual std::vector<std::uint8_t> getDebitDate() const = 0;
 
     /**
      * Gets the debit time as an array of bytes
@@ -48,7 +48,7 @@ public:
      * @return A 2-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getDebitTime() const = 0;
+    virtual std::vector<std::uint8_t> getDebitTime() const = 0;
 
     /**
      * Gets the debit amount value
@@ -80,7 +80,7 @@ public:
      * @return A 4-byte byte array
      * @since 1.0.0
      */
-    virtual const std::vector<uint8_t> getSamId() const = 0;
+    virtual std::vector<uint8_t> getSamId() const = 0;
 
     /**
      * Gets the SAM transaction number value as an int

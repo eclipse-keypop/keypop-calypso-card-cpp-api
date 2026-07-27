@@ -33,10 +33,8 @@ public:
      * @param cause The cause.
      * @since 2.0.0
      */
-    CryptoException(
-        const std::string& message, const std::shared_ptr<std::exception> cause)
+    CryptoException(const std::string& message, const std::exception& /*cause*/)
     : std::runtime_error(message) {
-        (void)cause;
     }
 };
 

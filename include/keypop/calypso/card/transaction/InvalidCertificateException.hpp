@@ -20,19 +20,25 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates that the card has correctly closed the secure session, but that it
- * is impossible to check the authenticity of the card session because the
- * cryptographic module is no more available (timeout, network problem, etc.).
+ * Indicates that the certificate is invalid.
  *
- * @since 1.2.0
+ * <p>This exception is thrown when a certificate fails validation checks. This
+ * includes issues with the certificate's signature validity, as well as
+ * problems with other essential fields of the certificate, such as the validity
+ * period, issuer and subject details, and any relevant constraints or
+ * extensions. It signifies that the certificate does not conform to the
+ * expected standards and requirements, either due to incorrect signing,
+ * expiration, revocation, or other compliance failures.
+ *
+ * @since 2.1.0
  */
-class CardSignatureNotVerifiableException final : public std::runtime_error {
+class InvalidCertificateException final : public std::runtime_error {
 public:
     /**
      * @param message The message to identify the exception context.
-     * @since 1.2.0
+     * @since 2.1.0
      */
-    explicit CardSignatureNotVerifiableException(const std::string& message)
+    explicit InvalidCertificateException(const std::string& message)
     : std::runtime_error(message) {
     }
 
@@ -41,9 +47,9 @@ public:
      *
      * @param message Message to identify the exception context.
      * @param cause The cause.
-     * @since 1.2.0
+     * @since 2.1.0
      */
-    CardSignatureNotVerifiableException(
+    InvalidCertificateException(
         const std::string& message, const std::exception& /*cause*/)
     : std::runtime_error(message) {
     }

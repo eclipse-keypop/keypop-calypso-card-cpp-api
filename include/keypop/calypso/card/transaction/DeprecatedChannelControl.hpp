@@ -10,35 +10,35 @@
 
 #pragma once
 
-#include <string>
-
 namespace keypop {
 namespace calypso {
 namespace card {
+namespace transaction {
 
 /**
- * API properties.
+ * Policy for managing the physical channel after a card request is executed.
  *
  * @since 2.0.0
  */
-// class CalypsoCardApiProperties final {
-// public:
-//     /**
-//      * API version: {@value}
-//      *
-//      * @since 1.0.0
-//      */
-//     static const std::string VERSION;
+enum class ChannelControl {
+    /**
+     * Leaves the physical channel open.
+     *
+     * @since 2.0.0
+     */
+    KEEP_OPEN,
 
-// private:
-//     /**
-//      * Private constructor
-//      */
-//     CalypsoCardApiProperties() {}
-// };
+    /**
+     * Terminates communication with the card.<br>
+     * The physical channel closes instantly or a card removal sequence is
+     * initiated depending on the observation mode.
+     *
+     * @since 2.0.0
+     */
+    CLOSE_AFTER
+};
 
-static const std::string& CalypsoCardApiProperties_VERSION = "2.1";
-
+} /* namespace transaction */
 } /* namespace card */
 } /* namespace calypso */
 } /* namespace keypop */

@@ -11,8 +11,8 @@
 #pragma once
 
 #include <memory>
-#include <stdexcept>
-#include <string>
+
+#include "keypop/calypso/card/transaction/SecureTransactionManager.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -20,33 +20,30 @@ namespace card {
 namespace transaction {
 
 /**
- * Indicates that the card has correctly closed the secure session, but that it
- * is impossible to check the authenticity of the card session because the
- * cryptographic module is no more available (timeout, network problem, etc.).
+ * Manager of card transactions secured by asymmetric key cryptographic
+ * algorithms, compatible with Calypso cards in PKI mode.
  *
- * @since 1.2.0
+ * @since 2.1.0
  */
-class CardSignatureNotVerifiableException final : public std::runtime_error {
+class SecurePkiModeTransactionManager
+: public virtual SecureTransactionManager<SecurePkiModeTransactionManager> {
 public:
     /**
-     * @param message The message to identify the exception context.
-     * @since 1.2.0
+     *
      */
-    explicit CardSignatureNotVerifiableException(const std::string& message)
-    : std::runtime_error(message) {
-    }
+    virtual ~SecurePkiModeTransactionManager() = default;
 
     /**
-     * Encapsulates a lower level exception.
+     * Schedules the execution of an "Open Secure Session" command in PKI mode.
      *
-     * @param message Message to identify the exception context.
-     * @param cause The cause.
-     * @since 1.2.0
+     * <p>Note that if the next prepared command is a "Read One Record" or "Read
+     * One Or More Counters", then it will by default be merged with the "Open
+     * Secure Session" command for optimization purposes.
+     *
+     * @return The current instance.
+     * @since 2.1.0
      */
-    CardSignatureNotVerifiableException(
-        const std::string& message, const std::exception& /*cause*/)
-    : std::runtime_error(message) {
-    }
+    virtual SecurePkiModeTransactionManager& prepareOpenSecureSession() = 0;
 };
 
 } /* namespace transaction */

@@ -42,7 +42,8 @@ public:
      * @param cause The cause.
      * @since 1.2.0
      */
-    explicit UnexpectedCommandStatusException(const std::string& message)
+    explicit UnexpectedCommandStatusException(
+        const std::string& message, const std::exception& /* cause */)
     : std::runtime_error(message) {
     }
 };
