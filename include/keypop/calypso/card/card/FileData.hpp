@@ -11,8 +11,11 @@
 #pragma once
 
 #include <cstdint>
+#include <iomanip>
 #include <map>
 #include <memory>
+#include <ostream>
+#include <sstream>
 #include <vector>
 
 namespace keypop {
@@ -103,6 +106,49 @@ public:
      * @since 1.0.0
      */
     virtual std::map<const int, const int> getAllCountersValue() const = 0;
+
+    /**
+     * Renders the records this file holds, so that a log shows the content and
+     * not the address of the object.
+     */
+    friend std::ostream&
+    operator<<(std::ostream& os, const FileData& fd) {
+        /* Formatted apart so the caller's stream keeps its own flags. */
+        std::ostringstream ss;
+        ss << std::uppercase << std::hex << std::setfill('0');
+
+        ss << "FILE_DATA: {RECORDS: {";
+        bool isFirst = true;
+        for (const auto& record : fd.getAllRecordsContent()) {
+            if (!isFirst) {
+                ss << ", ";
+            }
+            isFirst = false;
+            ss << std::setw(2) << static_cast<int>(record.first) << ": ";
+            for (const auto byte : record.second) {
+                ss << std::setw(2) << static_cast<int>(byte);
+            }
+        }
+        ss << "}}";
+
+        os << ss.str();
+
+        return os;
+    }
+
+    /**
+     *
+     */
+    friend std::ostream&
+    operator<<(std::ostream& os, const std::shared_ptr<FileData>& fd) {
+        if (fd == nullptr) {
+            os << "FILE_DATA: null";
+        } else {
+            os << *fd;
+        }
+
+        return os;
+    }
 };
 
 } /* namespace card */
