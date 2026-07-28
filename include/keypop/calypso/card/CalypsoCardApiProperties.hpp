@@ -37,7 +37,7 @@ namespace card {
 //     CalypsoCardApiProperties() {}
 // };
 
-static const std::string& CalypsoCardApiProperties_VERSION = "2.1";
+static const std::string& CalypsoCardApiProperties_VERSION = "2.2";
 
 } /* namespace card */
 } /* namespace calypso */

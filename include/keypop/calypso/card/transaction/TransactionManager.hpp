@@ -18,6 +18,7 @@
 #include "keypop/calypso/card/SelectFileControl.hpp"
 #include "keypop/calypso/card/transaction/ChannelControl.hpp"
 #include "keypop/calypso/card/transaction/SearchCommandData.hpp"
+#include "keypop/reader/transaction/spi/CardTransactionManager.hpp"
 
 namespace keypop {
 namespace calypso {
@@ -54,7 +55,7 @@ namespace transaction {
  * @since 2.0.0
  */
 template <typename T>
-class TransactionManager {
+class TransactionManager : public CardTransactionManager<T> {
 public:
     /**
      * Schedules the execution of a "Select File" command to select an EF by its

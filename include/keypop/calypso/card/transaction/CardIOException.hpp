@@ -23,6 +23,8 @@ namespace transaction {
  * Indicates a communication error with the card (e.g. card removal, etc...).
  *
  * @since 1.0.0
+ * @deprecated This exception is deprecated and will be removed in a future
+ * version.
  */
 class CardIOException final : public std::runtime_error {
 public:
