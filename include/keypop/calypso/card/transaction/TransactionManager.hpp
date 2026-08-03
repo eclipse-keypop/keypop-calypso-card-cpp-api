@@ -16,7 +16,7 @@
 #include "keypop/calypso/card/GetDataTag.hpp"
 #include "keypop/calypso/card/PutDataTag.hpp"
 #include "keypop/calypso/card/SelectFileControl.hpp"
-#include "keypop/calypso/card/transaction/ChannelControl.hpp"
+// #include "keypop/calypso/card/transaction/ChannelControl.hpp"
 #include "keypop/calypso/card/transaction/SearchCommandData.hpp"
 #include "keypop/reader/transaction/spi/CardTransactionManager.hpp"
 
@@ -24,6 +24,8 @@ namespace keypop {
 namespace calypso {
 namespace card {
 namespace transaction {
+
+using keypop::reader::transaction::spi::CardTransactionManager;
 
 /**
  * Contains operations common to all card transactions.
@@ -55,7 +57,7 @@ namespace transaction {
  * @since 2.0.0
  */
 template <typename T>
-class TransactionManager : public CardTransactionManager<T> {
+class TransactionManager : public virtual CardTransactionManager<T> {
 public:
     /**
      * Schedules the execution of a "Select File" command to select an EF by its
@@ -743,8 +745,9 @@ public:
      * @throw SelectFileException If a "Select File" prepared card command
      * indicated that the file was not found.
      * @since 1.6.0
+     * @deprecated Use processCommands(keypop::reader::ChannelControl) instead.
      */
-    virtual T& processCommands(ChannelControl channelControl) = 0;
+    // virtual T& processCommands(ChannelControl channelControl) = 0;
 
     /**
      * Returns the audit data of the transaction containing all APDU exchanges
