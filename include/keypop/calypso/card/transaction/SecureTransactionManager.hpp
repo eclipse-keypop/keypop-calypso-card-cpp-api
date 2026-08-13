@@ -42,7 +42,7 @@ public:
      * @throw IllegalArgumentException If the provided class is null.
      * @since 2.0.0
      */
-    virtual std::shared_ptr<CardCalypsoCryptoExtention> getCryptoExtension()
+    virtual std::shared_ptr<CardTransactionCryptoExtention> getCryptoExtension()
         = 0;
 
     /**
