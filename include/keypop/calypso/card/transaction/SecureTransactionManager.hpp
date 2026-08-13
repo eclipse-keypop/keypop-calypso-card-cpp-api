@@ -42,8 +42,8 @@ public:
      * @throw IllegalArgumentException If the provided class is null.
      * @since 2.0.0
      */
-    // template <typename E>
-    // virtual std::shared_ptr<E> getCryptoExtension() = 0; // FIXME
+    template <typename E>
+    virtual std::shared_ptr<E> getCryptoExtension() = 0;
 
     /**
      * Schedules the execution of a "Close Secure Session" command.
