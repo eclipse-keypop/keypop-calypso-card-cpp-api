@@ -65,7 +65,7 @@ public:
      *
      * @since 1.6.0
      */
-    virtual SecureTransactionManager& prepareCloseSecureSession() = 0;
+    virtual T& prepareCloseSecureSession() = 0;
 
     /**
      * Schedules the execution of a special "Close Secure Session" command in
@@ -77,7 +77,7 @@ public:
      * @return The current instance.
      * @since 1.6.0
      */
-    virtual SecureTransactionManager& prepareCancelSecureSession() = 0;
+    virtual T& prepareCancelSecureSession() = 0;
 };
 
 } /* namespace transaction */
