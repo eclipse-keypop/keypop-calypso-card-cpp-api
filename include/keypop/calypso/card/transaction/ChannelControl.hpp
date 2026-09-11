@@ -19,6 +19,7 @@ namespace transaction {
  * Policy for managing the physical channel after a card request is executed.
  *
  * @since 2.0.0
+ * @deprecated This enum is deprecated and will be removed in a future version.
  */
 enum class ChannelControl {
     /**

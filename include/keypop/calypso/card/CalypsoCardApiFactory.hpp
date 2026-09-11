@@ -166,7 +166,7 @@ public:
      * @return A new instance of SearchCommandData}.
      * @since 2.0.0
      */
-    virtual std::unique_ptr<SearchCommandData> createSearchCommandData() = 0;
+    virtual std::shared_ptr<SearchCommandData> createSearchCommandData() = 0;
 };
 
 } /* namespace card */

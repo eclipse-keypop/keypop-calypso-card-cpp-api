@@ -11,8 +11,10 @@
 #pragma once
 
 #include <cstdint>
+#include <iomanip>
 #include <memory>
 #include <ostream>
+#include <sstream>
 #include <vector>
 
 #include "keypop/calypso/card/card/FileData.hpp"
@@ -109,10 +111,27 @@ public:
      */
     friend std::ostream&
     operator<<(std::ostream& os, const ElementaryFile& ef) {
+        /*
+         * The SFI is formatted apart: streamed as a uint8_t it would come out
+         * as a character, and most SFI values are not printable.
+         */
+        std::ostringstream sfi;
+        sfi << std::uppercase << std::hex << std::setfill('0') << std::setw(2)
+            << static_cast<int>(ef.getSfi());
+
         os << "ELEMENTARY_FILE: {"
-           << "SFI: " << ef.getSfi() << ", "
-           << "HEADER: " << ef.getHeader() << ", "
-           << "DATA: " << ef.getData() << "}";
+           << "SFI: " << sfi.str() << "h";
+
+        /*
+         * A header is reported as present only. FileHeader includes this header
+         * for the Type enumeration, so it is an incomplete type here and cannot
+         * be rendered; print the header itself to see its fields.
+         */
+        if (ef.getHeader() != nullptr) {
+            os << ", HEADER: set";
+        }
+
+        os << ", " << ef.getData() << "}";
 
         return os;
     }

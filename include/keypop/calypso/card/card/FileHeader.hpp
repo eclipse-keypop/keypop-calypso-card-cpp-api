@@ -11,7 +11,10 @@
 #pragma once
 
 #include <cstdint>
+#include <iomanip>
 #include <memory>
+#include <ostream>
+#include <sstream>
 #include <vector>
 
 #include "keypop/calypso/card/card/ElementaryFile.hpp"
@@ -113,6 +116,73 @@ public:
      * @since 1.0.0
      */
     virtual const std::shared_ptr<std::uint16_t> getSharedReference() const = 0;
+
+    /**
+     * Renders the header fields, so that a log shows the content and not the
+     * address of the object.
+     */
+    friend std::ostream&
+    operator<<(std::ostream& os, const FileHeader& fh) {
+        const char* efType;
+        switch (fh.getEfType()) {
+        case ElementaryFile::Type::LINEAR: efType = "LINEAR"; break;
+        case ElementaryFile::Type::BINARY: efType = "BINARY"; break;
+        case ElementaryFile::Type::CYCLIC: efType = "CYCLIC"; break;
+        case ElementaryFile::Type::COUNTERS: efType = "COUNTERS"; break;
+        case ElementaryFile::Type::SIMULATED_COUNTERS:
+            efType = "SIMULATED_COUNTERS";
+            break;
+        default: efType = "UNKNOWN"; break;
+        }
+
+        /* Formatted apart so the caller's stream keeps its own flags. */
+        std::ostringstream ss;
+        ss << std::uppercase << std::hex << std::setfill('0');
+
+        ss << "FILE_HEADER: {LID: " << std::setw(4) << fh.getLid()
+           << "h, EF_TYPE: " << efType << std::dec
+           << ", RECORDS: " << fh.getRecordsNumber()
+           << ", RECORD_SIZE: " << fh.getRecordSize() << std::hex
+           << ", ACCESS_CONDITIONS: ";
+        for (const auto byte : fh.getAccessConditions()) {
+            ss << std::setw(2) << static_cast<int>(byte);
+        }
+        ss << ", KEY_INDEXES: ";
+        for (const auto byte : fh.getKeyIndexes()) {
+            ss << std::setw(2) << static_cast<int>(byte);
+        }
+        ss << ", DF_STATUS: ";
+        if (fh.getDfStatus() != nullptr) {
+            ss << std::setw(2) << static_cast<int>(*fh.getDfStatus()) << "h";
+        } else {
+            ss << "null";
+        }
+        ss << ", SHARED_REFERENCE: ";
+        if (fh.getSharedReference() != nullptr) {
+            ss << std::setw(4) << *fh.getSharedReference() << "h";
+        } else {
+            ss << "null";
+        }
+        ss << "}";
+
+        os << ss.str();
+
+        return os;
+    }
+
+    /**
+     *
+     */
+    friend std::ostream&
+    operator<<(std::ostream& os, const std::shared_ptr<FileHeader>& fh) {
+        if (fh == nullptr) {
+            os << "FILE_HEADER: null";
+        } else {
+            os << *fh;
+        }
+
+        return os;
+    }
 };
 
 } /* namespace card */
