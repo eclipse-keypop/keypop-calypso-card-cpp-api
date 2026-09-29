@@ -2,6 +2,12 @@ name: Publish API documentation (release)
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (existing release tag, e.g. 1.0.0); the documentation is generated from the selected branch'
+        required: true
+        type: string
 
 permissions:
   checks: write
