@@ -1,0 +1,6 @@
+<map id="keypop::calypso::card::transaction::SecurePkiModeTransactionManager" name="keypop::calypso::card::transaction::SecurePkiModeTransactionManager">
+<area shape="rect" id="node1" title="Manager of card transactions secured by asymmetric key cryptographic algorithms, compatible with Caly..." alt="" coords="897,5,1088,61"/>
+<area shape="rect" id="node2" href="$classkeypop_1_1calypso_1_1card_1_1transaction_1_1_secure_transaction_manager.html" title=" " alt="" coords="545,5,849,61"/>
+<area shape="rect" id="node3" href="$classkeypop_1_1calypso_1_1card_1_1transaction_1_1_transaction_manager.html" title="Contains operations common to all card transactions." alt="" coords="251,13,497,54"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,20,203,47"/>
+</map>

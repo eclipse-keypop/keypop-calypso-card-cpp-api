@@ -1,0 +1,5 @@
+<map id="keypop::calypso::card::transaction::UnauthorizedKeyException" name="keypop::calypso::card::transaction::UnauthorizedKeyException">
+<area shape="rect" id="node1" title="Indicates that the card requires an unauthorized session key." alt="" coords="5,155,180,211"/>
+<area shape="rect" id="node2" title=" " alt="" coords="31,80,154,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="42,5,143,32"/>
+</map>

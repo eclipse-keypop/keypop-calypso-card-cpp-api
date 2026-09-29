@@ -1,0 +1,5 @@
+<map id="keypop::calypso::card::transaction::UnexpectedCommandStatusException" name="keypop::calypso::card::transaction::UnexpectedCommandStatusException">
+<area shape="rect" id="node1" title="Indicates that an unexpected command status was returned by the card or the cryptographic module." alt="" coords="5,155,232,211"/>
+<area shape="rect" id="node2" title=" " alt="" coords="57,80,180,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="68,5,169,32"/>
+</map>

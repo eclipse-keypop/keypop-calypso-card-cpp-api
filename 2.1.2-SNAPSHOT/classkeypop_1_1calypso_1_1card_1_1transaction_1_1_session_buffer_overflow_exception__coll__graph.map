@@ -1,0 +1,5 @@
+<map id="keypop::calypso::card::transaction::SessionBufferOverflowException" name="keypop::calypso::card::transaction::SessionBufferOverflowException">
+<area shape="rect" id="node1" title="Indicates that the secure session cannot be performed atomically because the session buffer capacity ..." alt="" coords="5,155,184,211"/>
+<area shape="rect" id="node2" title=" " alt="" coords="33,80,156,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="44,5,145,32"/>
+</map>
