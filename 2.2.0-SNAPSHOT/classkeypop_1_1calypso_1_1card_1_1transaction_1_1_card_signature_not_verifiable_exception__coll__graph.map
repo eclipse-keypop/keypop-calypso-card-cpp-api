@@ -1,0 +1,5 @@
+<map id="keypop::calypso::card::transaction::CardSignatureNotVerifiableException" name="keypop::calypso::card::transaction::CardSignatureNotVerifiableException">
+<area shape="rect" id="node1" title="Indicates that the card has correctly closed the secure session, but that it is impossible to check t..." alt="" coords="5,155,185,211"/>
+<area shape="rect" id="node2" title=" " alt="" coords="34,80,157,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="45,5,146,32"/>
+</map>
