@@ -38,3 +38,6 @@ out
 # IDE files and directories
 CMakeSettings.json
 /.vscode/
+
+# Conan
+CMakeUserPresets.json
