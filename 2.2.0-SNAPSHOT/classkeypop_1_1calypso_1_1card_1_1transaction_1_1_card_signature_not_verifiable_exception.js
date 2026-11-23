@@ -1,5 +1,0 @@
-var classkeypop_1_1calypso_1_1card_1_1transaction_1_1_card_signature_not_verifiable_exception =
-[
-    [ "CardSignatureNotVerifiableException", "classkeypop_1_1calypso_1_1card_1_1transaction_1_1_card_signature_not_verifiable_exception.html#ac34b73dc1d4789b1fd719613ca394f2e", null ],
-    [ "CardSignatureNotVerifiableException", "classkeypop_1_1calypso_1_1card_1_1transaction_1_1_card_signature_not_verifiable_exception.html#a9de0f657795f1bcfc63c1df0099a65ad", null ]
-];
