@@ -23,14 +23,14 @@ ADD_EXECUTABLE(
     ${CMAKE_CURRENT_SOURCE_DIR}/CalypsoCardApiPropertiesTest.cpp
 )
 
-# Add Google Test
-INCLUDE(CMakeLists.txt.googletest)
+# GTest/GMock are supplied by Conan (test_requires) via CMakeDeps
+FIND_PACKAGE(GTest REQUIRED CONFIG)
 
 TARGET_LINK_LIBRARIES(
 
     ${EXECTUABLE_NAME}
 
-    gtest
-    gmock
+    GTest::gtest
+    GTest::gmock
     Keypop::Calypso::Card
 )

@@ -9,6 +9,4 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: eclipse-keypop/keypop-actions/.github/workflows/reusable-cpp-build-and-test.yml@main # NOSONAR - Same organization, trusted source
-    with:
-      test_executable_name: './build/bin/keypopcalypsocard_ut'
+    uses: eclipse-keypop/keypop-actions/.github/workflows/reusable-conan-build-and-test.yml@main # NOSONAR - Same organization, trusted source
