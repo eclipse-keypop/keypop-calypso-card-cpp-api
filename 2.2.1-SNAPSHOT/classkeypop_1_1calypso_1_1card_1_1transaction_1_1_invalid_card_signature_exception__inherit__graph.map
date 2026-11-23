@@ -1,0 +1,5 @@
+<map id="keypop::calypso::card::transaction::InvalidCardSignatureException" name="keypop::calypso::card::transaction::InvalidCardSignatureException">
+<area shape="rect" id="node1" title="Indicates that the card signature is incorrect." alt="" coords="5,155,224,211"/>
+<area shape="rect" id="node2" title=" " alt="" coords="53,80,176,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="64,5,165,32"/>
+</map>

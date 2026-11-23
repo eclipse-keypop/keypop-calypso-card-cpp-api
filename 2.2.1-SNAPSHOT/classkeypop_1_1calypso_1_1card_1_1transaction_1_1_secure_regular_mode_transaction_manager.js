@@ -1,0 +1,4 @@
+var classkeypop_1_1calypso_1_1card_1_1transaction_1_1_secure_regular_mode_transaction_manager =
+[
+    [ "~SecureRegularModeTransactionManager", "classkeypop_1_1calypso_1_1card_1_1transaction_1_1_secure_regular_mode_transaction_manager.html#ae9ecd7cf262acdfab6f7e04a18230f6b", null ]
+];

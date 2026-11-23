@@ -1,0 +1,4 @@
+var classkeypop_1_1calypso_1_1card_1_1transaction_1_1spi_1_1_card_transaction_crypto_extension =
+[
+    [ "~CardTransactionCryptoExtension", "classkeypop_1_1calypso_1_1card_1_1transaction_1_1spi_1_1_card_transaction_crypto_extension.html#ae797cd65e11816c91aef158680d7376d", null ]
+];

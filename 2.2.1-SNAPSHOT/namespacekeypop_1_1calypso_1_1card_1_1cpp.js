@@ -1,0 +1,5 @@
+var namespacekeypop_1_1calypso_1_1card_1_1cpp =
+[
+    [ "SecureExtendedModeTransactionManagerBase", "classkeypop_1_1calypso_1_1card_1_1cpp_1_1_secure_extended_mode_transaction_manager_base.html", "classkeypop_1_1calypso_1_1card_1_1cpp_1_1_secure_extended_mode_transaction_manager_base" ],
+    [ "SecureRegularModeTransactionManagerBase", "classkeypop_1_1calypso_1_1card_1_1cpp_1_1_secure_regular_mode_transaction_manager_base.html", "classkeypop_1_1calypso_1_1card_1_1cpp_1_1_secure_regular_mode_transaction_manager_base" ]
+];

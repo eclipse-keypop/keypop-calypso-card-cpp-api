@@ -1,0 +1,5 @@
+<map id="keypop::calypso::card::transaction::FreeTransactionManager" name="keypop::calypso::card::transaction::FreeTransactionManager">
+<area shape="rect" id="node1" title="Manager of card transactions requiring no cryptographic computation." alt="" coords="17,199,209,255"/>
+<area shape="rect" id="node2" href="$classkeypop_1_1calypso_1_1card_1_1transaction_1_1_transaction_manager.html" title=" " alt="" coords="5,95,221,151"/>
+<area shape="rect" id="node3" title=" " alt="" coords="19,5,207,47"/>
+</map>
